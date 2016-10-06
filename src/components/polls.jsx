@@ -19,7 +19,7 @@ const Polls = ({ polls, dispatch }) => {
 
 const mapStateToProps = (state) => {
   return {
-    polls: state.get('polls')
+    polls: state.reducer.get('polls')
   };
 };
 

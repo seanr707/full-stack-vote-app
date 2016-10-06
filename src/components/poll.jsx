@@ -1,11 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { thunkActions } from '../actions/index.jsx';
 
-const Poll = ({ poll, dispatch }) => {
+const Poll = ({ poll, polls, dispatch, params }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
+
+  if (!poll) {
+    poll = polls.find(poll => poll._id === params.pollId);
+  }
 
   const tempPoll = {
     update: {
@@ -34,7 +39,7 @@ const Poll = ({ poll, dispatch }) => {
 
   return (
     <div className="poll">
-      <h3>{poll.title}</h3>
+      <h3><Link to={`/poll/${poll._id}`}>{poll.title}</Link></h3>
       <p>{poll.desc}</p>
       <ul>
         {poll.options.map((option, i) => {
@@ -54,4 +59,10 @@ const Poll = ({ poll, dispatch }) => {
   );
 };
 
-export default connect()(Poll);
+const mapStateToProps = state => {
+  return {
+    polls: state.reducer.get('polls')
+  };
+};
+
+export default connect(mapStateToProps)(Poll);

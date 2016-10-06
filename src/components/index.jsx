@@ -1,11 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { thunkActions } from '../actions/index.jsx';
-import Polls from './polls.jsx';
 
-const Test = ({ polls, user, dispatch }) => {
+const Test = ({ polls, user, dispatch, children }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
 
   const getClick = () => {
@@ -50,19 +50,28 @@ const Test = ({ polls, user, dispatch }) => {
   }
 
   return (
-    <div id="home-container">
-      {userInfo}
-      <button onClick={thunkBind.verifyUser}>Check Login</button>
-      <button onClick={getClick}>Update polls</button>
-      <button onClick={newClick} disabled={!user}>Add new fake poll</button>
-      <Polls polls={polls} />
+    <div id="root">
+      <nav className="navbar">
+        <div className="navbar-container">
+          <div className="left nav-item">
+            <Link to="/">Home</Link>
+          </div>
+        </div>
+      </nav>
+      <div id="home-container">
+        {userInfo}
+        <button onClick={thunkBind.verifyUser}>Check Login</button>
+        <button onClick={getClick}>Update polls</button>
+        <button onClick={newClick} disabled={!user}>Add new fake poll</button>
+        {children}
+      </div>
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    user: state.get('user')
+    user: state.reducer.get('user')
   };
 };
 
