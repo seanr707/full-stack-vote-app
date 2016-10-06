@@ -65,10 +65,7 @@ export const thunkActions = {
   votePoll: (pollId, optionId) => {
     return dispatch => {
       return axios.put(`/poll/id/${pollId}/vote/${optionId}`).then(
-        res => {
-          console.log(res.data);
-          dispatch(actions.updatePoll(res.data))
-        },
+        res => dispatch(actions.updatePoll(res.data)),
         err => console.log(err)
       );
     };

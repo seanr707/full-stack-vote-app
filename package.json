@@ -6,7 +6,8 @@
   "scripts": {
     "build-production": "webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors",
     "build": "webpack --progress --colors",
-    "dev": "node_modules/.bin/webpack-dev-server --inline --hot --colors --progress"
+    "dev": "node_modules/.bin/webpack-dev-server --inline --hot --colors --progress",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
