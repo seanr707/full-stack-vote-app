@@ -6,5 +6,9 @@ module.exports = mongoose.Schema({
     id: mongoose.Schema.Types.ObjectId,
     name: String
   },
+  votes: {
+    up: Number,
+    down: Number
+  },
   dateAdded: Number
 });

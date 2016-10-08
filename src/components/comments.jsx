@@ -8,9 +8,12 @@ import { thunkActions } from '../actions/index.jsx';
 const Comment = ({ comment }) => {
   if (!comment) return null;
 
+  const date = new Date(comment.dateAdded);
+
   return (
     <div className="comment">
       <p>{comment.text}</p>
+      <p>{date.toLocaleString()}</p>
       <p>By: {comment.author.name}</p>
     </div>
   );
@@ -27,6 +30,10 @@ const Comments = ({ pollId, comments, user, dispatch }) => {
       author: {
         id: user._id,
         name: user.name
+      },
+      votes: {
+        up: 0,
+        down: 0
       },
       text: commentText.value,
       dateAdded: Date.now()
