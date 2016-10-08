@@ -87,6 +87,17 @@ export const thunkActions = {
       );
     };
   },
+  addComment: (id, comment) => {
+    return dispatch => {
+      axios.post(`/poll/id/${id}/comments`, { comment }).then(
+        res => {
+          console.log(res);
+          dispatch(thunkActions.getAllPolls())
+        },
+        err => console.error(err)
+      );
+    };
+  },
   verifyUser: (id) => {
     return dispatch => {
       return axios.get('/auth/check').then(

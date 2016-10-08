@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const userSchema = require('./user');
 const pollOptionSchema = require('./pollOption');
+const commentSchema = require('./comment');
 
 const pollSchema = mongoose.Schema({
   title: String,
@@ -12,7 +13,8 @@ const pollSchema = mongoose.Schema({
   },
   date_added: Number,
   updated: Number,
-  options: [pollOptionSchema]
+  options: [pollOptionSchema],
+  comments: [commentSchema]
 });
 
 module.exports = () => {
