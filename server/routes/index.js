@@ -17,6 +17,11 @@ module.exports = (app, models, publicPath) => {
       return res.sendFile(publicPath + '/index.html');
     });
 
+  app.route('/poll/page/:pollId')
+    .get((req, res) => {
+      return res.redirect('/');
+    });
+
   app.route('/poll/id/:pollId')
     .get((req, res) => {
       const id = { _id: req.params.pollId };
@@ -99,6 +104,7 @@ module.exports = (app, models, publicPath) => {
 
       newPoll.save((err, poll) => {
         if (err) console.error(err);
+        console.log(poll);
         return res.send(poll);
       });
     });
