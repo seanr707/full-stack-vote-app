@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Poll from './poll.jsx';
+import { Poll, Toolbar } from './index';
 
 const Polls = ({ polls, dispatch }) => {
   if (!polls) return <div>Loading...</div>;
@@ -13,13 +13,14 @@ const Polls = ({ polls, dispatch }) => {
           <Poll key={i} poll={poll} />
         );
       })}
+      <Toolbar />
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    polls: state.get('polls')
+    polls: state.reducer.get('polls')
   };
 };
 
