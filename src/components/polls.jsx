@@ -7,12 +7,14 @@ const Polls = ({ polls, dispatch }) => {
   if (!polls) return <div>Loading...</div>;
 
   return (
-    <div className="poll-container">
-      {polls.map((poll, i) => {
-        return (
-          <Poll key={i} poll={poll} />
-        );
-      })}
+    <div>
+      <div className="poll-container">
+        {polls.map((poll, i) => {
+          return (
+            <Poll key={i} poll={poll} />
+          );
+        })}
+      </div>
       <Toolbar />
     </div>
   );

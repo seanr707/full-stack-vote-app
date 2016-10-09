@@ -8,49 +8,12 @@ import { thunkActions } from '../actions/index.jsx';
 const Poll = ({ poll, dispatch }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
 
-  const tempPoll = {
-    update: {
-      title: 'Edited poll here',
-      desc: 'I was edited',
-      author: {
-        _id: null,
-        name: 'n/a'
-      },
-      options: [
-        {
-          title: 'Yeah',
-          votes: 0
-        },
-        {
-          title: 'Not here',
-          votes: 0
-        },
-        {
-          title: Math.floor(Math.random() * 5).toString(),
-          votes: 0
-        }
-      ]
-    }
-  };
-
   return (
-    <div className="poll">
-      <h3><Link to={`/poll/page/${poll._id}`}>{poll.title}</Link></h3>
-      <p>{poll.desc}</p>
-      <ul>
-        {poll.options.map((option, i) => {
-          return (
-            <li key={i} onClick={() => thunkBind.votePoll(poll._id, option._id)}>
-                {option.title}: {option.votes}
-            </li>
-          );
-        })}
-      </ul>
+    <div className="poll-tile">
+      <h3 title={poll.desc.substr(0, 20)}>
+        <Link to={`/poll/page/${poll._id}`}>{poll.title}</Link>
+      </h3>
       <p>Author: {poll.author.name}</p>
-      <div className="button-container">
-        <button onClick={() => thunkBind.editPoll(poll._id, tempPoll)}>Edit</button>
-        <button onClick={() => thunkBind.deletePoll(poll._id)}>Delete</button>
-      </div>
     </div>
   );
 };
