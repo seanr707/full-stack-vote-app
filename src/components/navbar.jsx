@@ -15,16 +15,23 @@ const Navbar = ({ user }) => {
       </div>
     );
   } else {
-    userInfo = <a hidden={user} href="/auth/twitter" ><button>Login</button></a>;
+    userInfo = (
+      <a hidden={user} href="/auth/twitter" >
+        <div>Login</div>
+      </a>
+    );
   }
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <div className="left nav-item">
-          <Link to="/">Home</Link>
+          <Link to="/">Vote App</Link>
         </div>
         <div className="right">
+          <div className="nav-item">
+            <Link to="/">Home</Link>
+          </div>
           <div className="nav-item">
             {userInfo}
           </div>
