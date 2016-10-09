@@ -24,7 +24,7 @@ module.exports = {
       },
       {
         test: /.scss?$/,
-        loader: ExtractTextPlugin.extract('css!sass!postcss-loader')
+        loader: ExtractTextPlugin.extract('css!postcss-loader!sass?config=scssLoader')
       }
     ]
   },

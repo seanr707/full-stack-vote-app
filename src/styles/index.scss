@@ -1,10 +1,16 @@
 body {
   background: #ededed;
   font-family: sans-serif;
+  margin: 0;
 }
 
 div {
   transition: all 0.2s ease;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 // BEGIN RESPONSIVE GRID
@@ -38,6 +44,20 @@ div {
 }
 // END RESPONSIVE GRID
 
+@mixin makeBtn($background, $text) {
+  background: $background;
+  color: $text;
+  border: 1px solid darken($background, 10);
+
+  &:hover {
+    background: darken($background, 8);
+  }
+
+  &:active {
+    background: lighten($background, 5);
+  }
+}
+
 .poll-container {
   display: flex;
   flex-wrap: wrap;
@@ -61,4 +81,61 @@ div {
   padding: 30px 50px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   transition: all 0.2s ease;
+}
+
+.navbar {
+  background: #3377cc;
+  color: #efefef;
+  padding: 10px;
+  margin: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-container {
+  margin: 0 auto;
+}
+
+.nav-item {
+  margin: 4px 2px;
+
+  &:hover {
+    background: lighten(#3377cc, 10);
+  }
+}
+
+.left {
+  display: inline-block;
+}
+
+.right {
+  float: right;
+  display: inline-block;
+}
+
+.btn-container {
+  display: inline-block;
+}
+
+.btn {
+  width: 75px;
+  padding: 10px;
+  border-radius: 3px;
+  margin: 5px;
+  background: none;
+  border: none;
+}
+
+.btn-default {
+  @include makeBtn(#eaeaea, #444444);
+}
+
+.toolbar {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin: 5px auto;
+  padding: 5px;
+  background: #fafafa;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
