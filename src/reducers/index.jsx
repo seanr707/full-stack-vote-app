@@ -3,8 +3,8 @@ import { Map, List } from 'immutable';
 import { actionTypes } from '../actions/index.jsx';
 
 const initialState = Map({
-  polls: undefined,
-  user: undefined
+  polls: null,
+  user: null
 });
 
 const reducer = (state = initialState, action) => {
@@ -18,8 +18,9 @@ const reducer = (state = initialState, action) => {
   case actionTypes.UPDATE_POLLS:
     return state.set('polls', List(action.polls));
   case actionTypes.LOGIN:
-    console.log(action.user);
     return state.set('user', action.user);
+  case actionTypes.LOGOUT:
+    return state.set('user', null);
   default:
     console.log(state);
     return state;

@@ -5,7 +5,8 @@ export const actionTypes = {
   VOTE_ON: 'VOTE_ON',
   UPDATE_POLL: 'UPDATE_POLL',
   UPDATE_POLLS: 'UPDATE_POLLS',
-  LOGIN: 'LOGIN'
+  LOGIN: 'LOGIN',
+  LOGOUT: 'LOGOUT'
 };
 
 export const actions = {
@@ -39,6 +40,11 @@ export const actions = {
     return {
       type: actionTypes.LOGIN,
       user
+    };
+  },
+  logout: () => {
+    return {
+      type: actionTypes.LOGOUT
     };
   }
 };
