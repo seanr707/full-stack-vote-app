@@ -17,26 +17,23 @@ module.exports = (app, models, publicPath) => {
       return res.sendFile(publicPath + '/index.html');
     });
 
+  /*
   app.route('/poll/page/:pollId')
     .get((req, res) => {
       return res.redirect('/');
     });
+  */
 
   app.route('/poll/id/:pollId')
     .get((req, res) => {
       const id = { _id: req.params.pollId };
 
-      return models.Poll.findById(id, (err, poll) => {
-        if (err) res.send(err);
-        return res.send(poll);
-      });
+      return models.Poll.findById(id, callback(res));
     })
     .put(jsonParser, (req, res) => {
       const id = { _id: req.params.pollId };
 
-      return models.Poll.findOneAndUpdate(id, req.body.update, { new: true }, (err, poll) => {
-        return res.send(err ? false : poll);
-      });
+      return models.Poll.findOneAndUpdate(id, req.body.update, { new: true }, callback(res));
     })
     .delete((req, res) => {
       const id = { _id: req.params.pollId };
@@ -69,13 +66,20 @@ module.exports = (app, models, publicPath) => {
           return option;
         });
 
-        models.Poll.findOneAndUpdate(id, { options: update }, { new: true }, (err, poll) => {
-          if (err) console.error(err);
-          console.log('Here are the update options to send out?');
-          console.log(poll.options);
-          return res.send(poll);
-        });
+        models.Poll.findOneAndUpdate(id, { options: update }, { new: true }, callback(res));
       });
+    });
+
+  app.route('/poll/id/:pollId/comments')
+    .post(jsonParser, (req, res) => {
+      const id = { _id: req.params.pollId };
+      console.log(req.body.comment);
+      models.Poll.findByIdAndUpdate(
+        id,
+        { $push: { comments: req.body.comment } },
+        { new: true },
+        callback(res)
+      );
     });
 
   app.route('/poll/all')

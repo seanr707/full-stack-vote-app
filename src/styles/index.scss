@@ -1,10 +1,19 @@
+$border-radius: 3px;
+$max-width: 800px;
+
 body {
   background: #ededed;
   font-family: sans-serif;
+  margin: 0;
 }
 
-div {
-  transition: all 0.2s ease;
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button:focus {
+  outline: none;
 }
 
 // BEGIN RESPONSIVE GRID
@@ -38,18 +47,47 @@ div {
 }
 // END RESPONSIVE GRID
 
+@mixin makeBtn($background, $text) {
+  background: $background;
+  color: $text;
+  border: 1px solid darken($background, 10);
+
+  &:hover {
+    background: darken($background, 8);
+  }
+
+  &:active {
+    background: lighten($background, 5);
+  }
+}
+
 .poll-container {
-  display: flex;
-  flex-wrap: wrap;
+  max-width: $max-width;
+  margin: 5px auto;
+  border-radius: $border-radius;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
 
-  .poll {
-    padding: 10px;
-    text-align: center;
-    max-width: 150px;
+.poll-tile {
+  border: 1px solid #aaaaaa;
+  background: white;
+  padding: 10px 20px;
+  margin-top: -1px;
+  transition: all 0.2s ease;
 
-    &:hover {
-      box-shadow: 0 1px 2px rgba(75, 100, 200, 0.4);
-    }
+  &:first-child {
+    margin-top: 10px;
+    border-radius: $border-radius $border-radius 0 0;
+  }
+
+  &:last-of-type {
+    margin-bottom: 10px;
+    border-radius: 0 0 $border-radius $border-radius;
+  }
+
+  &:hover {
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -60,5 +98,95 @@ div {
   margin: 5px auto;
   padding: 30px 50px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-  transition: all 0.2s ease;
+}
+
+.navbar {
+  background: #3377cc;
+  color: #efefef;
+  padding: 0 5px;
+  margin: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-container {
+  margin: 0 auto;
+}
+
+.nav-title {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nav-item {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.nav-option {
+  &:hover {
+    background: rgba(255, 255, 255, 0.4);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.left {
+  display: inline-block;
+}
+
+.right {
+  float: right;
+  display: inline-block;
+}
+
+.btn-container {
+  display: inline-block;
+}
+
+.btn {
+  width: 75px;
+  padding: 10px;
+  border-radius: 3px;
+  margin: 5px;
+  background: none;
+  border: none;
+}
+
+.btn-default {
+  @include makeBtn(#eaeaea, #444444);
+}
+
+.toolbar {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin: 0 auto;
+  padding: 5px;
+  background: #fafafa;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.toolbar-container {
+  display: flex;
+  max-width: $max-width / 2;
+  margin: 0 auto;
+}
+
+.toolbar-item {
+  display: inline-block;
+  font-family: monospace;
+  font-size: 32px;
+  font-weight: bold;
+  color: #484848;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #212121;
+  }
 }

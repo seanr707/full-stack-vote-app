@@ -5,7 +5,8 @@ export const actionTypes = {
   VOTE_ON: 'VOTE_ON',
   UPDATE_POLL: 'UPDATE_POLL',
   UPDATE_POLLS: 'UPDATE_POLLS',
-  LOGIN: 'LOGIN'
+  LOGIN: 'LOGIN',
+  LOGOUT: 'LOGOUT'
 };
 
 export const actions = {
@@ -39,6 +40,11 @@ export const actions = {
     return {
       type: actionTypes.LOGIN,
       user
+    };
+  },
+  logout: () => {
+    return {
+      type: actionTypes.LOGOUT
     };
   }
 };
@@ -83,6 +89,17 @@ export const thunkActions = {
     return dispatch => {
       return axios.delete('/poll/id/' + id).then(
         res => dispatch(thunkActions.getAllPolls()),
+        err => console.error(err)
+      );
+    };
+  },
+  addComment: (id, comment) => {
+    return dispatch => {
+      axios.post(`/poll/id/${id}/comments`, { comment }).then(
+        res => {
+          console.log(res);
+          dispatch(thunkActions.getAllPolls())
+        },
         err => console.error(err)
       );
     };

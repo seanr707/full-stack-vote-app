@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { thunkActions } from '../actions/index.jsx';
 
+import { Comments } from './index';
+
 const Poll = ({ polls, user, dispatch, params }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
   const poll = polls.find(poll => poll._id === params.pollId);
@@ -55,6 +57,7 @@ const Poll = ({ polls, user, dispatch, params }) => {
       </ul>
       <p>Author: {poll.author.name}</p>
       {user && poll.author.id === user._id ? editButtons : null}
+      <Comments pollId={poll._id} comments={poll.comments} />
     </div>
   );
 };

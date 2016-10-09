@@ -33,7 +33,3 @@ render(
   </Provider>,
   document.getElementById('app')
 );
-
-console.log('ready to update...');
-store.dispatch(thunkActions.getAllPolls());
-store.dispatch(thunkActions.verifyUser());

@@ -36,18 +36,22 @@ const Toolbar = ({ user, dispatch }) => {
       ]
     });
   };
-  console.log('Toolbar');
-  console.log(!user);
+
   return (
     <div className="toolbar">
-      <button className="btn btn-default" onClick={getClick}>
-        Refresh
-      </button>
-      { /* <Link to="/poll/add"> */ }
-        <button className="btn btn-default" onClick={newClick}>
-          New Poll
-        </button>
-      { /* </Link> */ }
+      <div className="toolbar-container">
+        <div className="toolbar-item" onClick={getClick}>
+          ↻
+        </div>
+        { /* <Link to="/poll/add"> */ }
+        {user
+          ? <div className="toolbar-item" onClick={newClick}>
+            +
+          </div>
+          : null
+        }
+        { /* </Link> */ }
+      </div>
     </div>
   );
 };
