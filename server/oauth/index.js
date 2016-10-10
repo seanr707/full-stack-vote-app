@@ -1,9 +1,9 @@
-const passport = require('passport');
-const TwitterStrategy = require('passport-twitter').Strategy;
+import passport from 'passport';
+import { Strategy } from 'passport-twitter';
 
-const keys = require('../keys');
-module.exports = (models) => {
-  passport.use(new TwitterStrategy(
+import keys from '../keys';
+export default (models) => {
+  passport.use(new Strategy.TwitterStrategy(
     {
       consumerKey: keys.TWITTER_CONSUMER_KEY,
       consumerSecret: keys.TWITTER_CONSUMER_SECRET,
