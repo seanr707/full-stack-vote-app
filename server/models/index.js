@@ -17,6 +17,16 @@ const pollSchema = mongoose.Schema({
   comments: [commentSchema]
 });
 
+export default () => {
+  return {
+    Poll: mongoose.model('Poll', pollSchema),
+    PollOption: mongoose.model('PollOption', pollOptionSchema),
+    User: mongoose.model('User', userSchema)
+  };
+};
+
+/*
 export const Poll = mongoose.model('Poll', pollSchema);
 export const PollOption = mongoose.model('PollOption', pollOptionSchema);
 export const User = mongoose.model('User', userSchema);
+*/
