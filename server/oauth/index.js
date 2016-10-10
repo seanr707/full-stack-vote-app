@@ -1,12 +1,12 @@
 import passport from 'passport';
 import { Strategy } from 'passport-twitter';
 
-import keys from '../keys';
+import { TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET } from '../keys';
 export default (models) => {
-  passport.use(new Strategy.TwitterStrategy(
+  passport.use(new Strategy(
     {
-      consumerKey: keys.TWITTER_CONSUMER_KEY,
-      consumerSecret: keys.TWITTER_CONSUMER_SECRET,
+      consumerKey: TWITTER_CONSUMER_KEY,
+      consumerSecret: TWITTER_CONSUMER_SECRET,
       callbackURL: 'http://127.0.0.1:5050/auth/twitter/callback'
     },
       (token, tokenSecret, profile, done) => {
