@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const userSchema = require('./user');
-const pollOptionSchema = require('./pollOption');
-const commentSchema = require('./comment');
+import userSchema from './user';
+import pollOptionSchema from './pollOption';
+import commentSchema from './comment';
 
 const pollSchema = mongoose.Schema({
   title: String,
@@ -17,10 +17,6 @@ const pollSchema = mongoose.Schema({
   comments: [commentSchema]
 });
 
-module.exports = () => {
-  return {
-    Poll: mongoose.model('Poll', pollSchema),
-    PollOption: mongoose.model('PollOption', pollOptionSchema),
-    User: mongoose.model('User', userSchema)
-  };
-};
+export const Poll = mongoose.model('Poll', pollSchema);
+export const PollOption = mongoose.model('PollOption', pollOptionSchema);
+export const User = mongoose.model('User', userSchema);

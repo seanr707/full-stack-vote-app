@@ -1,6 +1,7 @@
-const passport = require('passport');
-const jsonParser = require('body-parser').json();
+import passport from 'passport';
+import { json } from 'body-parser';
 
+const jsonParser = json();
 const errorCheck = err => {
   return err ? res.send(true) : res.send(false);
 };
@@ -11,7 +12,7 @@ const callback = (res) => {
   };
 };
 
-module.exports = (app, models, publicPath) => {
+export default (app, models, publicPath) => {
   app.route('/')
     .get((req, res) => {
       return res.sendFile(publicPath + '/index.html');

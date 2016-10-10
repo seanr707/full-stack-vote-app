@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-module.exports = mongoose.Schema({
+export default mongoose.Schema({
   text: String,
   author: {
     id: mongoose.Schema.Types.ObjectId,
