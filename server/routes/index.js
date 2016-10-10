@@ -18,12 +18,10 @@ export default (app, models, publicPath) => {
       return res.sendFile(publicPath + '/index.html');
     });
 
-  /*
   app.route('/poll/page/:pollId')
     .get((req, res) => {
-      return res.redirect('/');
+      return res.redirect(302, '/');
     });
-  */
 
   app.route('/poll/id/:pollId')
     .get((req, res) => {
