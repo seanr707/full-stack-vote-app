@@ -13,9 +13,13 @@ const app = express();
 
 // Constants
 const DBNAME = 'fcc-voting-app';
-const VIEWDIR = process.cwd() + '/public';
+const VIEWDIR = process.cwd() + '/public/views';
 
 app.set('port', (process.env.PORT || 5050));
+
+app.set('view engine', 'ejs');
+app.set('views', VIEWDIR);
+app.use('/public', express.static('./public'));
 
 // Store sessions
 app.use(session({
@@ -42,10 +46,8 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   const modelsObj = models();
   oauth(modelsObj);
-  routes(app, modelsObj, VIEWDIR);
+  routes(app, modelsObj);
 });
-
-app.use('/public', express.static(VIEWDIR));
 
 app.listen(app.get('port'), function () {
   console.log('Node.js listening on port ' + app.get('port') + '...');

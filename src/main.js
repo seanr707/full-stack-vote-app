@@ -26,12 +26,10 @@ const history = syncHistoryWithStore(browserHistory, store);
 render(
   <Provider store={store}>
     <Router history={history} routes={routes}>
-    {/* Visual display of routes
       <Route path="/" component={Main}>
         <IndexRoute component={Polls} />
         <Route path="/poll/page/:pollId" component={PollPage} />
       </Route>
-    */}
     </Router>
   </Provider>,
   document.getElementById('app')
