@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { thunkActions } from '../actions/index.jsx';
 
 import { Comments } from './index';
+import { Graph } from './index';
 
 const Poll = ({ polls, user, dispatch, params }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
@@ -55,6 +56,8 @@ const Poll = ({ polls, user, dispatch, params }) => {
           );
         })}
       </ul>
+      <section id="graph" />
+      <Graph votes={poll.options} />
       <p>Author: {poll.author.name}</p>
       {user && poll.author.id === user._id ? editButtons : null}
       <Comments pollId={poll._id} comments={poll.comments} />
