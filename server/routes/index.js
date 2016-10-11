@@ -12,15 +12,18 @@ const callback = (res) => {
   };
 };
 
-export default (app, models, publicPath) => {
+export default (app, models) => {
   app.route('/')
     .get((req, res) => {
-      return res.sendFile(publicPath + '/index.html');
+      return res.render('main');
     });
 
   app.route('/poll/page/:pollId')
     .get((req, res) => {
-      return res.redirect(302, '/');
+      const id = { _id: req.params.pollId };
+      return models.Poll.findById(id, (err, poll) => {
+        res.render('pollPage', { poll });
+      });
     });
 
   app.route('/poll/id/:pollId')
