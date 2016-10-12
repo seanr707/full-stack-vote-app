@@ -15,27 +15,41 @@ const Graph = ({ votes }) => {
   const outerRadius = (width / 2) - 10;
 
   return (
-    <svg height={height} width={width}>
-      {/* <circle cx={width / 2} cy={height / 2} r={outerRadius} /> */}
-      {votes.reduce(sumOfVotes, 0) > 0
-        ? arcs.map((data, i, arr) => {
-          const d = arc()
-            .innerRadius(innerRadius)
-            .outerRadius(outerRadius);
-          const style = {
-            transform: `translate(${height / 2}px, ${width / 2}px)`
-          };
+    <div>
+      <svg height={height} width={width}>
+        {/* <circle cx={width / 2} cy={height / 2} r={outerRadius} /> */}
+        {votes.reduce(sumOfVotes, 0) > 0
+          ? arcs.map((data, i, arr) => {
+            const d = arc()
+              .innerRadius(innerRadius)
+              .outerRadius(outerRadius);
+            const style = {
+              transform: `translate(${height / 2}px, ${width / 2}px)`
+            };
+            return (
+              <path key={i} className={'pie-piece-' + (i + 1)} d={d(data)} style={style} title={votes[i].title}>
+                <title>{votes[i].title}: {data.value}</title>
+              </path>
+            );
+          })
+          : <text x={width / 2} y={height / 2} style={{fill: '#444444', textAnchor: 'middle'}}>
+              No data
+          </text>
+        }
+      </svg>
+      <div className="legend">
+        {votes.map((option, i) => {
           return (
-            <path key={i} className={'pie-piece-' + (i + 1)} d={d(data)} style={style} title={votes[i].title}>
-              <title>{votes[i].title}: {data.value}</title>
-            </path>
+            <div className="legend-item">
+              <div className={'legend-square pie-piece-' + (i + 1)} />
+              <div className="legend-title">
+                {option.title}
+              </div>
+            </div>
           );
-        })
-        : <text x={width / 2} y={height / 2} style={{fill: '#444444', textAnchor: 'middle'}}>
-            No data
-        </text>
-      }
-    </svg>
+        })}
+      </div>
+    </div>
   );
 };
 
