@@ -1,6 +1,67 @@
 $border-radius: 3px;
 $max-width: 800px;
 
+@for $i from 1 through 30 {
+
+  .pie-piece-#{$i} {
+    @if $i % 2 == 0 {
+      $red: 255;
+      $green: 50 + ($i * 10);
+      $blue: 50;
+
+      $color: rgba($red, $green, $blue, 1);
+
+      fill: lighten($color, 10);
+
+      &:hover {
+        fill: darken($color, 10);
+      }
+    } @else if $i % 3 == 0 {
+      $red: 20;
+      $green: 10 + ($i * 10);
+      $blue: 255;
+
+      $color: rgba($red, $green, $blue, 1);
+
+      fill: lighten($color, 10);
+
+      &:hover {
+        fill: darken($color, 10);
+      }
+    } @else if $i % 5 == 0 {
+      $red: 50 + ($i * 10);
+      $green: 30;
+      $blue: 255;
+
+      $color: rgba($red, $green, $blue, 1);
+
+      fill: lighten($color, 10);
+
+      &:hover {
+        fill: darken($color, 10);
+      }
+    } @else {
+      $red: 100 + ($i * 10);
+      $green: 30;
+      $blue: 100 + ($i * 10);
+
+      $color: rgba($red, $green, $blue, 1);
+
+      fill: lighten($color, 10);
+
+      &:hover {
+        fill: $color;
+      }
+    }
+  }
+}
+
+[class*="pie-piece-"] {
+    stroke: #484848;
+    stroke-width: 2px;
+    transition: all 1s ease;
+}
+
 body {
   background: #ededed;
   font-family: sans-serif;
@@ -10,6 +71,11 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+circle {
+  fill: rgba(220, 220, 220, 1);
+  stroke: #343434;
 }
 
 button:focus {
@@ -59,6 +125,12 @@ button:focus {
   &:active {
     background: lighten($background, 5);
   }
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .poll-container {

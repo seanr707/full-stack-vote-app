@@ -22,11 +22,47 @@ const Toolbar = ({ user, dispatch }) => {
       },
       options: [
         {
-          title: 'Yeah',
+          title: Math.floor(Math.random() * 100).toString(),
           votes: 0
         },
         {
-          title: 'Not here',
+          title: Math.floor(Math.random() * 100).toString(),
+          votes: 0
+        },
+        {
+          title: Math.floor(Math.random() * 100).toString(),
+          votes: 0
+        },
+        {
+          title: Math.floor(Math.random() * 100).toString(),
+          votes: 0
+        },
+        {
+          title: Math.floor(Math.random() * 100).toString(),
+          votes: 0
+        },
+        {
+          title: Math.floor(Math.random() * 100).toString(),
+          votes: 0
+        },
+        {
+          title: Math.floor(Math.random() * 100).toString(),
+          votes: 0
+        },
+        {
+          title: Math.floor(Math.random() * 100).toString(),
+          votes: 0
+        },
+        {
+          title: Math.floor(Math.random() * 100).toString(),
+          votes: 0
+        },
+        {
+          title: Math.floor(Math.random() * 100).toString(),
+          votes: 0
+        },
+        {
+          title: Math.floor(Math.random() * 100).toString(),
           votes: 0
         },
         {
