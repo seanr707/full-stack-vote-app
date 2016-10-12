@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { thunkActions } from '../actions/index.jsx';
 
 import { Comments } from './index';
+import { Graph } from './index';
 
 const Poll = ({ polls, user, dispatch, params }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
@@ -43,20 +44,27 @@ const Poll = ({ polls, user, dispatch, params }) => {
   );
 
   return (
-    <div className="poll">
-      <h3>{poll.title}</h3>
-      <p>{poll.desc}</p>
-      <ul>
-        {poll.options.map((option, i) => {
-          return (
-            <li key={i} onClick={() => thunkBind.votePoll(poll._id, option._id)}>
-              {option.title}: {option.votes}
-            </li>
-          );
-        })}
-      </ul>
-      <p>Author: {poll.author.name}</p>
-      {user && poll.author.id === user._id ? editButtons : null}
+    <div className="container">
+      <div className="poll row">
+        <div className="pollInfo col-8">
+          <h3>{poll.title}</h3>
+          <p>{poll.desc}</p>
+          <ul>
+            {poll.options.map((option, i) => {
+              return (
+                <li key={i} onClick={() => thunkBind.votePoll(poll._id, option._id)}>
+                  {option.title}: {option.votes}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div className="graph col-4">
+          <Graph votes={poll.options} />
+        </div>
+        <p>Author: {poll.author.name}</p>
+        {user && poll.author.id === user._id ? editButtons : null}
+      </div>
       <Comments pollId={poll._id} comments={poll.comments} />
     </div>
   );
