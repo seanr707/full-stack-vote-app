@@ -13,18 +13,13 @@ const callback = (res) => {
 };
 
 export default (app, models) => {
-  app.route('/')
-    .get((req, res) => {
-      return res.render('main');
-    });
+  app.get('/', (req, res) => {
+    return res.render('main');
+  });
 
-  app.route('/poll/page/:pollId')
-    .get((req, res) => {
-      const id = { _id: req.params.pollId };
-      return models.Poll.findById(id, (err, poll) => {
-        res.render('pollPage', { poll });
-      });
-    });
+  app.get('/page/*', (req, res) => {
+    return res.render('main');
+  });
 
   app.route('/poll/id/:pollId')
     .get((req, res) => {
@@ -105,7 +100,10 @@ export default (app, models) => {
         title: input.title,
         desc: input.desc,
         author: input.author,
-        options: input.options
+        options: input.options.map(option => {
+          // Ensure that the client is not loading false votes
+          return Object.assign({}, option, { votes: 0 });
+        })
       });
 
       newPoll.save((err, poll) => {

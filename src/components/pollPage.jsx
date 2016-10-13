@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 
 import { thunkActions } from '../actions/index.jsx';
 
-import { Comments } from './index';
-import { Graph } from './index';
+import { Comments, Graph } from './index';
 
 const Poll = ({ polls, user, dispatch, params }) => {
+  // If this loads initially, then we need to wait for Promise Thunk to return
+  if (!polls) return <div>Loading...</div>;
+
   const thunkBind = bindActionCreators(thunkActions, dispatch);
   const poll = polls.find(poll => poll._id === params.pollId);
 
@@ -45,7 +47,7 @@ const Poll = ({ polls, user, dispatch, params }) => {
 
   return (
     <div className="container">
-      <div className="poll row">
+      <div className="page-main row">
         <div className="pollInfo col-8">
           <h3>{poll.title}</h3>
           <p>{poll.desc}</p>

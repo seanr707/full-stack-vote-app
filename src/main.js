@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import thunk from 'redux-thunk';
 
-import { Main, PollPage, Polls } from './components';
+import { Main, PollPage, Polls, SubmitPost } from './components';
 import reducer from './reducers';
 import routes from './routes';
 import { thunkActions } from './actions/index.jsx';
@@ -25,10 +25,11 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 render(
   <Provider store={store}>
-    <Router history={history} routes={routes}>
+    <Router history={history}>
       <Route path="/" component={Main}>
         <IndexRoute component={Polls} />
-        <Route path="/poll/page/:pollId" component={PollPage} />
+        <Route path="/page/submit" component={SubmitPost} />
+        <Route path="/page/poll/:pollId" component={PollPage} />
       </Route>
     </Router>
   </Provider>,

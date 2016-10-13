@@ -4,7 +4,20 @@ $max-width: 800px;
 @for $i from 1 through 30 {
 
   .pie-piece-#{$i} {
-    @if $i % 2 == 0 {
+    @if $i % 5 == 0 {
+      $red: 45;
+      $green: 100 + ($i * 10);
+      $blue: 75;
+
+      $color: rgba($red, $green, $blue, 1);
+
+      fill: lighten($color, 10);
+      background: lighten($color, 10);
+
+      &:hover {
+        fill: darken($color, 10);
+      }
+    } @else if $i % 4 == 0 {
       $red: 255;
       $green: 50 + ($i * 10);
       $blue: 50;
@@ -30,7 +43,7 @@ $max-width: 800px;
       &:hover {
         fill: darken($color, 10);
       }
-    } @else if $i % 5 == 0 {
+    } @else if $i % 2 == 0 {
       $red: 50 + ($i * 10);
       $green: 30;
       $blue: 255;
@@ -44,7 +57,7 @@ $max-width: 800px;
         fill: darken($color, 10);
       }
     } @else {
-      $red: 100 + ($i * 10);
+      $red: 50 + ($i * 10);
       $green: 30;
       $blue: 100 + ($i * 10);
 
@@ -159,6 +172,11 @@ button:focus {
   &:last-of-type {
     margin-bottom: 10px;
     border-radius: 0 0 $border-radius $border-radius;
+
+    &:hover {
+      // Makes shadow go up since it is at the bottom of the list
+      box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.4);
+    }
   }
 
   &:hover {
@@ -167,7 +185,7 @@ button:focus {
   }
 }
 
-.poll {
+.page-main {
   border: 1px solid #aaaaaa;
   border-radius: 2px;
   background: white;
@@ -215,6 +233,10 @@ button:focus {
 .right {
   float: right;
   display: inline-block;
+}
+
+.center {
+  text-align: center;
 }
 
 .btn-container {
@@ -293,4 +315,30 @@ button:focus {
   display: inline-block;
   margin-left: 5px;
   color: #343434;
+}
+
+.labeled-input {
+  margin: 4px auto;
+
+  label {
+    font-weight: bold;
+    margin: 3px 5px;
+    text-align: right;
+  }
+
+  input {
+    padding: 10px;
+    background: #e8e8e8;
+    color: #333333;
+    border: #8f8f8f;
+    border-radius: 2px;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4);
+    transition: background 0.2s ease;
+
+    &:focus {
+      outline: none;
+      background: #fafafa;
+      box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2);
+    }
+  }
 }
