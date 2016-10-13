@@ -100,7 +100,10 @@ export default (app, models) => {
         title: input.title,
         desc: input.desc,
         author: input.author,
-        options: input.options
+        options: input.options.map(option => {
+          // Ensure that the client is not loading false votes
+          return Object.assign({}, option, { votes: 0 });
+        })
       });
 
       newPoll.save((err, poll) => {

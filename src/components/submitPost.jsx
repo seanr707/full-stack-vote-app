@@ -24,11 +24,10 @@ const SubmitPost = ({ user, dispatch, params }) => {
           id: user._id,
           name: user.name
         },
-        // This needs to be changed for production: NEEDS TO SET DEFAULT VOTE ON SERVER SIDE
+        // votes property added on server
         options: options.value.split(/,\s?/g).map(option => {
           return {
-            title: option[0].toUpperCase() + option.substr(1),
-            votes: 0
+            title: option[0].toUpperCase() + option.substr(1)
           };
         })
       });
