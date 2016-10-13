@@ -8,6 +8,7 @@ import { Comments } from './index';
 import { Graph } from './index';
 
 const Poll = ({ polls, user, dispatch, params }) => {
+  if (!polls) return <div>Loading...</div>;
   const thunkBind = bindActionCreators(thunkActions, dispatch);
   const poll = polls.find(poll => poll._id === params.pollId);
 
