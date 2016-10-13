@@ -79,14 +79,14 @@ const Toolbar = ({ user, dispatch }) => {
         <div className="toolbar-item" onClick={getClick}>
           ↻
         </div>
-        { /* <Link to="/poll/add"> */ }
         {user
-          ? <div className="toolbar-item" onClick={newClick}>
-            +
-          </div>
+          ? <Link to="/page/submit">
+            <div className="toolbar-item">
+              +
+            </div>
+          </Link>
           : null
         }
-        { /* </Link> */ }
       </div>
     </div>
   );

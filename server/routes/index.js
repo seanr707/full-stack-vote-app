@@ -13,11 +13,6 @@ const callback = (res) => {
 };
 
 export default (app, models) => {
-  app.route('/')
-    .get((req, res) => {
-      return res.render('main');
-    });
-
   app.route('/poll/page/:pollId')
     .get((req, res) => {
       const id = { _id: req.params.pollId };
@@ -157,4 +152,8 @@ export default (app, models) => {
       });
       return res.send('Done deleting all polls.');
     });
+
+  app.get('*', (req, res) => {
+    return res.render('main');
+  });
 };

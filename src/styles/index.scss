@@ -4,7 +4,20 @@ $max-width: 800px;
 @for $i from 1 through 30 {
 
   .pie-piece-#{$i} {
-    @if $i % 2 == 0 {
+    @if $i % 5 == 0 {
+      $red: 45;
+      $green: 100 + ($i * 10);
+      $blue: 75;
+
+      $color: rgba($red, $green, $blue, 1);
+
+      fill: lighten($color, 10);
+      background: lighten($color, 10);
+
+      &:hover {
+        fill: darken($color, 10);
+      }
+    } @else if $i % 4 == 0 {
       $red: 255;
       $green: 50 + ($i * 10);
       $blue: 50;
@@ -30,7 +43,7 @@ $max-width: 800px;
       &:hover {
         fill: darken($color, 10);
       }
-    } @else if $i % 5 == 0 {
+    } @else if $i % 2 == 0 {
       $red: 50 + ($i * 10);
       $green: 30;
       $blue: 255;
@@ -44,7 +57,7 @@ $max-width: 800px;
         fill: darken($color, 10);
       }
     } @else {
-      $red: 100 + ($i * 10);
+      $red: 50 + ($i * 10);
       $green: 30;
       $blue: 100 + ($i * 10);
 
