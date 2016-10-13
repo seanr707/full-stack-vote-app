@@ -1,6 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import { thunkActions } from '../actions/index.jsx';
 
@@ -35,6 +36,8 @@ const SubmitPost = ({ user, dispatch, params }) => {
       title.value = '';
       desc.value = '';
       options.value = '';
+
+      browserHistory.push('/');
     }
   };
 
