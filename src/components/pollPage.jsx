@@ -47,7 +47,7 @@ const Poll = ({ polls, user, dispatch, params }) => {
 
   return (
     <div className="container">
-      <div className="poll row">
+      <div className="page-main row">
         <div className="pollInfo col-8">
           <h3>{poll.title}</h3>
           <p>{poll.desc}</p>
