@@ -11,8 +11,8 @@ const pollSchema = mongoose.Schema({
     id: mongoose.Schema.Types.ObjectId,
     name: String
   },
-  date_added: Number,
-  updated: Number,
+  dateAdded: Number,
+  dateUpdated: Number,
   options: [pollOptionSchema],
   comments: [commentSchema]
 });

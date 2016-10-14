@@ -29,8 +29,11 @@ export default (app, models) => {
     })
     .put(jsonParser, (req, res) => {
       const id = { _id: req.params.pollId };
+      const update = Object.assign({}, req.body.update, {
+        dateUpdated: Date.now()
+      });
 
-      return models.Poll.findOneAndUpdate(id, req.body.update, { new: true }, callback(res));
+      return models.Poll.findOneAndUpdate(id, update, { new: true }, callback(res));
     })
     .delete((req, res) => {
       const id = { _id: req.params.pollId };
@@ -100,6 +103,8 @@ export default (app, models) => {
         title: input.title,
         desc: input.desc,
         author: input.author,
+        dateAdded: Date.now(),
+        dateUpdated: Date.now(),
         options: input.options.map(option => {
           // Ensure that the client is not loading false votes
           return Object.assign({}, option, { votes: 0 });
