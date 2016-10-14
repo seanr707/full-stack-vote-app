@@ -1,10 +1,15 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import marked from 'marked';
 
 import { thunkActions } from '../actions/index.jsx';
 
 import { Comments, Graph } from './index';
+
+const markupPoll = desc => {
+  return { __html: marked(desc, { sanitize: true }) };
+};
 
 const Poll = ({ polls, user, dispatch, params }) => {
   // If this loads initially, then we need to wait for Promise Thunk to return
@@ -50,7 +55,7 @@ const Poll = ({ polls, user, dispatch, params }) => {
       <div className="page-main row">
         <div className="pollInfo col-8">
           <h3>{poll.title}</h3>
-          <p>{poll.desc}</p>
+          <p dangerouslySetInnerHTML={markupPoll(poll.desc)} />
           <ul>
             {poll.options.map((option, i) => {
               return (

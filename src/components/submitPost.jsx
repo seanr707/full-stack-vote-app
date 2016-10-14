@@ -47,15 +47,15 @@ const SubmitPost = ({ user, dispatch, params }) => {
         <form onSubmit={submit}>
           <div className="labeled-input row">
             <label className="col-4">Title</label>
-            <input ref={node => { title = node; }} className="col-5" placeholder="Favorite color?" />
+            <input ref={node => { title = node; }} className="poll-submit-input col-5" placeholder="Favorite color?" />
           </div>
           <div className="labeled-input row">
             <label className="col-4">Description</label>
-            <input ref={node => { desc = node; }} className="col-5" placeholder="Pick a color that you really love." />
+            <textarea ref={node => { desc = node; }} className="poll-submit-input col-5" placeholder="Use markdown to describe your poll." />
           </div>
           <div className="labeled-input row">
             <label className="col-4">Options</label>
-            <input ref={node => { options = node; }} title="Separate by comma" className="col-5" placeholder="Red, blue, green, yellow" />
+            <input ref={node => { options = node; }} title="Separate by comma" className="poll-submit-input col-5" placeholder="Red, blue, green, yellow" />
           </div>
           <div className="center">
             <button className="btn btn-default" type="submit">Add Poll</button>
