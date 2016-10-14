@@ -289,6 +289,12 @@ button:focus {
   }
 }
 
+.graph {
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+}
+
 .legend {
   display: flex;
   flex-wrap: wrap;
