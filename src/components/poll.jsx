@@ -10,10 +10,10 @@ const Poll = ({ poll, dispatch }) => {
 
   const miliseconds = 1000 * 60 * 60 * 24;
 
-  const timeText = poll.dateUpdated > poll.dateAdded ? 'Updated' : 'Added';
+  // const timeText = poll.dateUpdated > poll.dateAdded ? 'Updated' : 'Added';
 
   const date = poll.dateUpdated < poll.dateUpdated + miliseconds
-    ? new Date(poll.dateUpdated).toLocaleTimeString()
+    ? new Date(poll.dateUpdated).toLocaleTimeString().replace(/:[0-9][0-9]\s/, ' ')
     : new Date(poll.dateUpdated).toLocaleDateString();
 
   return (
@@ -23,8 +23,8 @@ const Poll = ({ poll, dispatch }) => {
           {poll.title}
         </h3>
         <div className="poll-info-container col-4">
-          <div>Author: {poll.author.name}</div>
-          <div>{timeText}: {date.toLocaleString()}</div>
+          <div className="poll-info-item">By {poll.author.name}</div>
+          <div className="poll-info-item">{date}</div>
         </div>
       </Link>
     </div>

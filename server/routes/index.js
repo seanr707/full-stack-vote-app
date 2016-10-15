@@ -2,13 +2,10 @@ import passport from 'passport';
 import { json } from 'body-parser';
 
 const jsonParser = json();
-const errorCheck = err => {
-  return err ? res.send(true) : res.send(false);
-};
 
 const callback = (res) => {
   return (err, polls) => {
-    return res.send(err ? false : polls);
+    return res.send(err || polls);
   };
 };
 

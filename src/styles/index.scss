@@ -332,8 +332,9 @@ button:focus {
     text-align: right;
   }
 
-  input {
+  .poll-submit-input {
     padding: 10px;
+    margin: 6px 0;
     background: #e8e8e8;
     color: #333333;
     border: #8f8f8f;
@@ -351,6 +352,11 @@ button:focus {
 
 .poll-info-container {
   text-align: right;
-  margin: 10px 0;
+  margin: 15px 0;
+}
+
+.poll-info-item {
+  font-size: 10px;
+  margin: 2px 0;
   color: #888888;
 }
