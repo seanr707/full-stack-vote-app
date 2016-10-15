@@ -2,10 +2,13 @@ import passport from 'passport';
 import { json } from 'body-parser';
 
 const jsonParser = json();
+const errorCheck = err => {
+  return err ? res.send(true) : res.send(false);
+};
 
 const callback = (res) => {
   return (err, polls) => {
-    return res.send(err || polls);
+    return res.send(err ? false : polls);
   };
 };
 
@@ -50,20 +53,83 @@ export default (app, models) => {
     })
     .put((req, res) => {
       const id = { _id: req.params.pollId };
+      let userId;
+
+      // If user is signed in then set userId to their ID from cookie
+      if (req.session.passport) {
+        userId = { twitterId: req.session.passport.user.profile.id };
+      }
 
       models.Poll.findOne(id, (err, poll) => {
-        if (err) console.error(err);
+        if (err) return err;
 
-        const update = poll.options.map(option => {
-          if (req.params.voteId === option._id.toString()) {
-            console.log(`Here is ${option.votes} + 1: ${option.votes + 1}`);
-            option.votes += 1;
-          }
+        if (userId) {
+          models.User.findOne(userId, (err, user) => {
+            if (err) return err;
 
-          return option;
-        });
+            console.log('User is logged in to vote!');
+            const newOptionId = req.params.voteId;
+            const pollVoted = user.pollsVoted.find(item => item.pollId.toString() === poll._id.toString());
 
-        models.Poll.findOneAndUpdate(id, { options: update }, { new: true }, callback(res));
+            let userUpdate;
+
+            let pollUpdate;
+
+            if (pollVoted) {
+              console.log('User has already voted, changing votes!');
+              pollUpdate = poll.options.map(option => {
+                if (pollVoted.optionId.toString() === req.params.voteId) {
+                  return option;
+                } else if (pollVoted.optionId.toString() === option._id.toString()) {
+                  console.log('Taking away old vote...');
+                  option.votes -= 1;
+                } else if (req.params.voteId === option._id.toString()) {
+                  console.log(`Here is ${option.votes} + 1: ${option.votes + 1}`);
+                  option.votes += 1;
+                }
+
+                return option;
+              });
+
+              userUpdate = user.pollsVoted.map(item => {
+                if (item.pollId.toString() === poll._id.toString()) {
+                  item.optionId = newOptionId;
+                }
+
+                return item;
+              });
+            } else {
+              console.log('User has NOT voted, adding vote!');
+              pollUpdate = poll.options.map(option => {
+                if (req.params.voteId === option._id.toString()) {
+                  console.log(`Here is ${option.votes} + 1: ${option.votes + 1}`);
+                  option.votes += 1;
+                }
+
+                return option;
+              });
+
+              userUpdate = user.pollsVoted.concat({
+                pollId: poll._id,
+                optionId: newOptionId
+              });
+            }
+
+            models.User.findOneAndUpdate(userId, { pollsVoted: userUpdate }).exec();
+            models.Poll.findOneAndUpdate(id, { options: pollUpdate }, { new: true }, callback(res));
+          });
+        } else {
+          const update = poll.options.map(option => {
+            if (req.params.voteId === option._id.toString()) {
+              console.log(`Here is ${option.votes} + 1: ${option.votes + 1}`);
+              option.votes += 1;
+            }
+
+            return option;
+          });
+
+          models.Poll.findOneAndUpdate(id, { options: update }, { new: true }, callback(res));
+        }
       });
     });
 
@@ -133,14 +199,7 @@ export default (app, models) => {
       }
 
       const id = { twitterId: req.session.passport.user.profile.id };
-      return models.User.findOne(id, (err, user) => {
-        if (err) {
-          console.error(err);
-          return res.send(false);
-        }
-
-        return res.send(user);
-      });
+      return models.User.findOne(id, callback(res));
     });
 
   app.route('/user/all')
