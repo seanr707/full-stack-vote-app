@@ -7,7 +7,7 @@ const Polls = ({ polls, dispatch }) => {
   if (!polls) return <div>Loading...</div>;
 
   return (
-    <div>
+    <div className="container">
       <div className="poll-container">
         {polls.map((poll, i) => {
           return (
