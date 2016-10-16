@@ -35,17 +35,14 @@ export default (app, models) => {
 
       console.log(input.options);
 
-      const newPoll = new models.Poll({
-        title: input.title,
-        desc: input.desc,
-        author: input.author,
+      const newPoll = new models.Poll(Object.assign({}, input, {
         dateAdded: Date.now(),
         dateUpdated: Date.now(),
         options: input.options.map(option => {
           // Ensure that the client is not loading false votes
           return Object.assign({}, option, { votes: 0 });
         })
-      });
+      }));
 
       newPoll.save((err, poll) => {
         if (err) console.error(err);

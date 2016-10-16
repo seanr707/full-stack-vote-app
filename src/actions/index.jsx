@@ -73,6 +73,7 @@ export const thunkActions = {
       const { reducer } = getState();
       return axios.put(`/poll/id/${pollId}/vote/${optionId}`).then(
         res => {
+          console.log(res.data);
           dispatch(actions.updatePoll(res.data));
           dispatch(thunkActions.verifyUser(reducer.get('_id')));
         },

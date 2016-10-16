@@ -11,6 +11,7 @@ const pollSchema = mongoose.Schema({
     id: mongoose.Schema.Types.ObjectId,
     name: String
   },
+  authRequired: Boolean,
   dateAdded: Number,
   dateUpdated: Number,
   options: [pollOptionSchema],
