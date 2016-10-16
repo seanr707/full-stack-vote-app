@@ -52,7 +52,7 @@ export const actions = {
 export const thunkActions = {
   postPoll: (poll) => {
     return dispatch => {
-      return axios.post('/poll/add', poll).then(
+      return axios.post('/polls', poll).then(
         res => dispatch(actions.addPoll(res.data)),
         err => console.error(err)
       );
@@ -83,7 +83,7 @@ export const thunkActions = {
   getAllPolls: () => {
     return dispatch => {
       console.log('updating polls...');
-      return axios.get('/poll/all').then(
+      return axios.get('/polls').then(
         res => dispatch(actions.updateAllPolls(res.data)),
         err => console.error(err)
       );
@@ -91,7 +91,7 @@ export const thunkActions = {
   },
   deletePoll: (id) => {
     return dispatch => {
-      return axios.delete('/poll/id/' + id).then(
+      return axios.delete(`/poll/id/${id}`).then(
         res => dispatch(thunkActions.getAllPolls()),
         err => console.error(err)
       );
@@ -100,10 +100,7 @@ export const thunkActions = {
   addComment: (id, comment) => {
     return dispatch => {
       axios.post(`/poll/id/${id}/comments`, { comment }).then(
-        res => {
-          console.log(res);
-          dispatch(thunkActions.getAllPolls())
-        },
+        res => dispatch(thunkActions.getAllPolls()),
         err => console.error(err)
       );
     };
