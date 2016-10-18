@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Navbar } from './index';
 
-import { thunkActions } from '../actions/index.jsx';
+import { thunkActions } from '../actions';
 
 class App extends React.Component {
   constructor(props) {

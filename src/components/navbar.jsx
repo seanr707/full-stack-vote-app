@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { actions } from '../actions/index.jsx';
+import { actions } from '../actions';
 
 const Navbar = ({ user, dispatch }) => {
   const actionBind = bindActionCreators(actions, dispatch);

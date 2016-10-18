@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
-import { thunkActions } from '../actions/index.jsx';
+import { thunkActions } from '../actions';
 
 const SubmitPost = ({ user, dispatch, params }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
