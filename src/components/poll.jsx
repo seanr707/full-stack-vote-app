@@ -12,7 +12,8 @@ const Poll = ({ poll, dispatch }) => {
 
   // const timeText = poll.dateUpdated > poll.dateAdded ? 'Updated' : 'Added';
 
-  const date = poll.dateUpdated < poll.dateUpdated + miliseconds
+  const date = Date.now() < (poll.dateUpdated + miliseconds)
+    // If less than a day old, display exact time (without the seconds value)
     ? new Date(poll.dateUpdated).toLocaleTimeString().replace(/:[0-9][0-9]\s/, ' ')
     : new Date(poll.dateUpdated).toLocaleDateString();
 
