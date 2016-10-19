@@ -46,7 +46,7 @@ const Graph = ({ params, polls }) => {
         {votes
           .map((option, i) => {
             return (
-              <div className="legend-item row">
+              <div key={i} className="legend-item row">
                 <div className={`legend-square pie-piece-${(i + 1)}`} />
                 <div className="legend-title">
                   {option.title}: {option.votes}
