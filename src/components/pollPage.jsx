@@ -33,7 +33,11 @@ const Poll = ({ polls, user, dispatch, params }) => {
           <p dangerouslySetInnerHTML={markupPoll(poll.desc)} />
           {
             poll.authRequired && !user
-              ? 'Login to vote'
+              ? <a href="/auth/twitter">
+                <button type="button" className="btn btn-default">
+                  Login
+                </button>
+              </a>
               : <Options poll={poll} user={user} />
           }
         </div>

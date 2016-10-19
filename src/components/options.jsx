@@ -43,6 +43,7 @@ const Options = ({ poll, user, dispatch }) => {
     </form>
   );
 };
+
 const mapStateToProps = state => {
   return {
     polls: state.reducer.get('polls'),
