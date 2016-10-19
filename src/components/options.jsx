@@ -1,6 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import { thunkActions } from '../actions';
 
@@ -8,6 +9,7 @@ const onSubmit = (poll, callback) => {
   return e => {
     e.preventDefault();
     const voteId = Array.from(e.target).find(radio => radio.checked).value;
+    browserHistory.push(`/page/poll/${poll._id}/results`);
     return callback(poll._id, voteId);
   };
 };
