@@ -11,7 +11,7 @@ const markupPoll = desc => {
   return { __html: marked(desc, { sanitize: true }) };
 };
 
-const Poll = ({ polls, user, dispatch, params, children }) => {
+const VotePage = ({ polls, user, dispatch, params }) => {
   // If this loads initially, then we need to wait for Promise Thunk to return
   if (!polls) return <div>Loading...</div>;
 
@@ -26,13 +26,18 @@ const Poll = ({ polls, user, dispatch, params, children }) => {
   );
 
   return (
-    <div className="container">
-      <div className="page-main row">
-        <h3>{poll.title}</h3>
-        {children}
-        <p>Author: {poll.author.name}</p>
-      </div>
-      <Comments pollId={poll._id} comments={poll.comments} />
+    <div className="pollInfo">
+      <p dangerouslySetInnerHTML={markupPoll(poll.desc)} />
+      {
+        poll.authRequired && !user
+          ? <a href="/auth/twitter">
+            <button type="button" className="btn btn-default">
+              Login
+            </button>
+          </a>
+          : <Options poll={poll} user={user} />
+      }
+      {user && poll.author.id === user._id ? editButtons : null}
     </div>
   );
 };
@@ -44,4 +49,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Poll);
+export default connect(mapStateToProps)(VotePage);

@@ -290,18 +290,20 @@ button:focus {
 }
 
 .graph {
-  @media screen and (max-width: 600px) {
-    display: none;
-  }
+  max-width: 500px;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .legend {
   display: flex;
   flex-wrap: wrap;
+  max-width: 300px;
   background: #dedede;
   border: 1px solid #bbbbbb;
   box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
   padding: 2px;
+  margin: 0 auto;
 }
 
 .legend-item {

@@ -4,7 +4,12 @@ import { pie, arc } from 'd3';
 
 const sumOfVotes = (prev, next) => prev + next.votes;
 
-const Graph = ({ votes }) => {
+const Graph = ({ params, polls }) => {
+  if (!polls) return <div>Loading...</div>;
+
+  const votes = polls
+    .find(poll => poll._id === params.pollId).options;
+
   const arcs = pie().value(d => {
     return d.votes;
   })(votes);
@@ -15,7 +20,7 @@ const Graph = ({ votes }) => {
   const outerRadius = (width / 2) - 10;
 
   return (
-    <div>
+    <div className="graph">
       <svg height={height} width={width}>
         {/* <circle cx={width / 2} cy={height / 2} r={outerRadius} /> */}
         {votes.reduce(sumOfVotes, 0) > 0
@@ -38,19 +43,27 @@ const Graph = ({ votes }) => {
         }
       </svg>
       <div className="legend">
-        {votes.map((option, i) => {
-          return (
-            <div className="legend-item">
-              <div className={'legend-square pie-piece-' + (i + 1)} />
-              <div className="legend-title">
-                {option.title}
+        {votes
+          .map((option, i) => {
+            return (
+              <div className="legend-item row">
+                <div className={`legend-square pie-piece-${(i + 1)}`} />
+                <div className="legend-title">
+                  {option.title}: {option.votes}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+      }
       </div>
     </div>
   );
 };
 
-export default connect()(Graph);
+const mapStateToProps = state => {
+  return {
+    polls: state.reducer.get('polls')
+  };
+};
+
+export default connect(mapStateToProps)(Graph);
