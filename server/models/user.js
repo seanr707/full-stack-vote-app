@@ -7,5 +7,9 @@ export default mongoose.Schema({
   profileImageUrl: String,
   location: String,
   url: String,
-  polls: Array
+  pollsCreated: [mongoose.Schema.Types.ObjectId],
+  pollsVoted: [{
+    pollId: mongoose.Schema.Types.ObjectId,
+    optionId: mongoose.Schema.Types.ObjectId
+  }]
 });

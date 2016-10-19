@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { thunkActions } from '../actions/index.jsx';
+import { thunkActions } from '../actions';
 
 const Poll = ({ poll, dispatch }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);

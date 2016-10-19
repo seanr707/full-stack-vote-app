@@ -9,7 +9,6 @@ import thunk from 'redux-thunk';
 import { Main, PollPage, Polls, SubmitPost } from './components';
 import reducer from './reducers';
 import routes from './routes';
-import { thunkActions } from './actions/index.jsx';
 
 import './styles/index.scss';
 

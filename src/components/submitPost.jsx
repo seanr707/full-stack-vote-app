@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
-import { thunkActions } from '../actions/index.jsx';
+import { thunkActions } from '../actions';
 
 const SubmitPost = ({ user, dispatch, params }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
@@ -11,6 +11,7 @@ const SubmitPost = ({ user, dispatch, params }) => {
   let title;
   let desc;
   let options;
+  let authRequired;
 
   const submit = e => {
     e.preventDefault();
@@ -18,6 +19,7 @@ const SubmitPost = ({ user, dispatch, params }) => {
     if (!title.value.trim() || !desc.value.trim() || !options.value.trim()) {
       return;
     } else {
+      console.log(authRequired.checked);
       thunkBind.postPoll({
         title: title.value,
         desc: desc.value,
@@ -30,12 +32,14 @@ const SubmitPost = ({ user, dispatch, params }) => {
           return {
             title: option[0].toUpperCase() + option.substr(1)
           };
-        })
+        }),
+        authRequired: authRequired.checked
       });
 
       title.value = '';
       desc.value = '';
       options.value = '';
+      authRequired.checked = false;
 
       browserHistory.push('/');
     }
@@ -56,6 +60,12 @@ const SubmitPost = ({ user, dispatch, params }) => {
           <div className="labeled-input row">
             <label className="col-4">Options</label>
             <input ref={node => { options = node; }} title="Separate by comma" className="poll-submit-input col-5" placeholder="Red, blue, green, yellow" />
+          </div>
+          <div className="labeled-input row">
+            <label className="col-8 center" title="One vote per logged in user">
+              Require account to vote
+              <input ref={node => { authRequired = node; }} type="checkbox" className="poll-submit-checkbox" />
+            </label>
           </div>
           <div className="center">
             <button className="btn btn-default" type="submit">Add Poll</button>

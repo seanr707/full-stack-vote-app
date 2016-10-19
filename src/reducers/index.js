@@ -1,6 +1,6 @@
 import { Map, List } from 'immutable';
 
-import { actionTypes } from '../actions/index.jsx';
+import { actionTypes } from '../actions';
 
 const initialState = Map({
   polls: null,
