@@ -48,24 +48,33 @@ const SubmitPost = ({ user, dispatch, params }) => {
   return (
     <div className="container">
       <div className="page-main">
-        <form onSubmit={submit}>
+        <div className="poll-head">
+          Add a Poll
+        </div>
+        <form className="poll-info" onSubmit={submit}>
           <div className="labeled-input row">
-            <label className="col-4">Title</label>
-            <input ref={node => { title = node; }} className="poll-submit-input col-5" placeholder="Favorite color?" />
-          </div>
-          <div className="labeled-input row">
-            <label className="col-4">Description</label>
-            <textarea ref={node => { desc = node; }} className="poll-submit-input col-5" placeholder="Use markdown to describe your poll." />
-          </div>
-          <div className="labeled-input row">
-            <label className="col-4">Options</label>
-            <input ref={node => { options = node; }} title="Separate by comma" className="poll-submit-input col-5" placeholder="Red, blue, green, yellow" />
-          </div>
-          <div className="labeled-input row">
-            <label className="col-8 center" title="One vote per logged in user">
-              Require account to vote
-              <input ref={node => { authRequired = node; }} type="checkbox" className="poll-submit-checkbox" />
+            <label className="col-4">
+              Title:
             </label>
+            <input ref={node => { title = node; }} className="poll-submit-input col-6" placeholder="Favorite color?" />
+          </div>
+          <div className="labeled-input row">
+            <label className="col-4">
+              { window.screen.availWidth < 500 ? 'Desc:' : 'Description:' }
+            </label>
+            <textarea ref={node => { desc = node; }} className="poll-submit-input col-6" placeholder="Use markdown to describe your poll." />
+          </div>
+          <div className="labeled-input row">
+            <label className="col-4">
+              Options:
+            </label>
+            <input ref={node => { options = node; }} title="Separate by comma" className="poll-submit-input col-6" placeholder="Red, blue, green, yellow" />
+          </div>
+          <div className="labeled-input row">
+            <label htmlFor="checkbox" className="col-4 center" title="One vote per logged in user">
+              Require Login:
+            </label>
+            <input id="checkbox" ref={node => { authRequired = node; }} type="checkbox" className="poll-submit-checkbox col-1" />
           </div>
           <div className="center">
             <button className="btn btn-default" type="submit">Add Poll</button>

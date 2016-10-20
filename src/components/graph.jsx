@@ -20,7 +20,7 @@ const Graph = ({ params, polls }) => {
   const outerRadius = (width / 2) - 10;
 
   return (
-    <div className="graph">
+    <div className="poll-info graph">
       <svg height={height} width={width}>
         {/* <circle cx={width / 2} cy={height / 2} r={outerRadius} /> */}
         {votes.reduce(sumOfVotes, 0) > 0
@@ -42,20 +42,34 @@ const Graph = ({ params, polls }) => {
           </text>
         }
       </svg>
-      <div className="legend">
-        {votes
-          .map((option, i) => {
-            return (
-              <div className="legend-item row">
-                <div className={`legend-square pie-piece-${(i + 1)}`} />
-                <div className="legend-title">
-                  {option.title}: {option.votes}
-                </div>
-              </div>
-            );
-          })
-      }
-      </div>
+      <table className="legend">
+        <thead>
+          <tr>
+            <th />
+            <th>Option</th>
+            <th>Votes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {votes
+            .map((option, i) => {
+              return (
+                <tr key={i} className="legend-row">
+                  <td className="legend-cell">
+                    <div className={`legend-square pie-piece-${(i + 1)}`} />
+                  </td>
+                  <td className="legend-cell legend-title">
+                    {option.title}
+                  </td>
+                  <td className="legend-cell">
+                    {option.votes}
+                  </td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
     </div>
   );
 };
