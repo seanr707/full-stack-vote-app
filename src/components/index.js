@@ -1,5 +1,6 @@
 import main from './main.jsx';
 import comments from './comments.jsx';
+import editPost from './editPost.jsx'
 import graph from './graph.jsx';
 import navbar from './navbar.jsx';
 import options from './options.jsx';
@@ -12,6 +13,7 @@ import votePage from './votePage.jsx';
 
 export const Main = main;
 export const Comments = comments;
+export const EditPost = editPost;
 export const Graph = graph;
 export const Navbar = navbar;
 export const Options = options;

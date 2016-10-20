@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import thunk from 'redux-thunk';
 
-import { Main, Graph, PollPage, Polls, SubmitPost, VotePage } from './components';
+import { Main, EditPost, Graph, PollPage, Polls, SubmitPost, VotePage } from './components';
 import reducer from './reducers';
 import routes from './routes';
 
@@ -32,6 +32,7 @@ render(
           <IndexRoute component={VotePage} />
           <Route path="/page/poll/:pollId/results" component={Graph} />
         </Route>
+        <Route path="/page/poll/:pollId/edit" component={EditPost} />
       </Route>
     </Router>
   </Provider>,
