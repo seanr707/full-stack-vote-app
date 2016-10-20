@@ -26,7 +26,7 @@ const VotePage = ({ polls, user, dispatch, params }) => {
   );
 
   return (
-    <div className="pollInfo">
+    <div className="poll-info">
       <p dangerouslySetInnerHTML={markupPoll(poll.desc)} />
       {
         poll.authRequired && !user

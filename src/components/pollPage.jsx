@@ -28,9 +28,16 @@ const Poll = ({ polls, user, dispatch, params, children }) => {
   return (
     <div className="container">
       <div className="page-main row">
-        <h3>{poll.title}</h3>
+        <div className="poll-head">{poll.title}</div>
         {children}
-        <p>Author: {poll.author.name}</p>
+        <div className="poll-foot">
+          <div style={{display: 'inline-block'}}>
+            {poll.author.name}
+          </div>
+          <div style={{float: 'right'}}>
+            {new Date(poll.dateUpdated).toLocaleString()}
+          </div>
+        </div>
       </div>
       <Comments pollId={poll._id} comments={poll.comments} />
     </div>

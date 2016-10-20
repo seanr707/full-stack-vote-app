@@ -20,7 +20,7 @@ const Graph = ({ params, polls }) => {
   const outerRadius = (width / 2) - 10;
 
   return (
-    <div className="graph">
+    <div className="poll-info graph">
       <svg height={height} width={width}>
         {/* <circle cx={width / 2} cy={height / 2} r={outerRadius} /> */}
         {votes.reduce(sumOfVotes, 0) > 0
