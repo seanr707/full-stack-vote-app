@@ -8,7 +8,7 @@ import { Comments } from './index';
 
 const Poll = ({ polls, user, dispatch, params, children }) => {
   // If this loads initially, then we need to wait for Promise Thunk to return
-  if (!polls) return <div>Loading...</div>;
+  if (!polls || polls.size === 0) return <div className="container">Loading...</div>;
 
   const thunkBind = bindActionCreators(thunkActions, dispatch);
   const poll = polls.find(poll => poll._id === params.pollId);

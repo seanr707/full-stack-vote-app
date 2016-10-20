@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Poll } from './index';
 
 const Polls = ({ polls, dispatch }) => {
-  if (!polls) return <div>Loading...</div>;
+  if (!polls || polls.size === 0) return <div className="container">Loading...</div>;
 
   return (
     <div className="container">
