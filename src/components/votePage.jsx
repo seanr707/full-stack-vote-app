@@ -12,9 +12,6 @@ const markupPoll = desc => {
 };
 
 const VotePage = ({ polls, user, dispatch, params }) => {
-  // If this loads initially, then we need to wait for Promise Thunk to return
-  if (!polls) return <div>Loading...</div>;
-
   const thunkBind = bindActionCreators(thunkActions, dispatch);
   const poll = polls.find(poll => poll._id === params.pollId);
 

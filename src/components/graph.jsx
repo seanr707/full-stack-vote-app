@@ -5,8 +5,6 @@ import { pie, arc } from 'd3';
 const sumOfVotes = (prev, next) => prev + next.votes;
 
 const Graph = ({ params, polls }) => {
-  if (!polls) return <div>Loading...</div>;
-
   const votes = polls
     .find(poll => poll._id === params.pollId).options;
 
