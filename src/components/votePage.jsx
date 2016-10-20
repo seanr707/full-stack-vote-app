@@ -1,6 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import marked from 'marked';
 
 import { thunkActions } from '../actions';
@@ -17,8 +18,10 @@ const VotePage = ({ polls, user, dispatch, params }) => {
 
   const editButtons = (
     <div className="button-container">
-      <button onClick={() => thunkBind.editPoll(poll._id, tempPoll)}>Edit</button>
-      <button onClick={() => thunkBind.deletePoll(poll._id)}>Delete</button>
+      <button type="button">
+        <Link to={`/page/poll/${poll._id}/edit`}>Edit</Link>
+      </button>
+      <button type="button"onClick={() => thunkBind.deletePoll(poll._id)}>Delete</button>
     </div>
   );
 
