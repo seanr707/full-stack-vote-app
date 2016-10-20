@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Navbar } from './index';
+import { Navbar, Toolbar } from './index';
 
 import { thunkActions } from '../actions';
 
@@ -32,6 +32,7 @@ class App extends React.Component {
       <div id="root">
         <Navbar />
         {this.props.children}
+        <Toolbar />
       </div>
     );
   }

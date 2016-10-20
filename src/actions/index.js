@@ -83,6 +83,7 @@ export const thunkActions = {
   },
   getAllPolls: () => {
     return dispatch => {
+      dispatch(actions.updateAllPolls(null));
       console.log('updating polls...');
       return axios.get('/polls').then(
         res => dispatch(actions.updateAllPolls(res.data)),

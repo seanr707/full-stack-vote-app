@@ -1,6 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import marked from 'marked';
 
 import { thunkActions } from '../actions';
@@ -12,16 +13,15 @@ const markupPoll = desc => {
 };
 
 const VotePage = ({ polls, user, dispatch, params }) => {
-  // If this loads initially, then we need to wait for Promise Thunk to return
-  if (!polls) return <div>Loading...</div>;
-
   const thunkBind = bindActionCreators(thunkActions, dispatch);
   const poll = polls.find(poll => poll._id === params.pollId);
 
   const editButtons = (
     <div className="button-container">
-      <button onClick={() => thunkBind.editPoll(poll._id, tempPoll)}>Edit</button>
-      <button onClick={() => thunkBind.deletePoll(poll._id)}>Delete</button>
+      <button type="button">
+        <Link to={`/page/poll/${poll._id}/edit`}>Edit</Link>
+      </button>
+      <button type="button"onClick={() => thunkBind.deletePoll(poll._id)}>Delete</button>
     </div>
   );
 

@@ -4,9 +4,13 @@ import { pie, arc } from 'd3';
 
 const sumOfVotes = (prev, next) => prev + next.votes;
 
-const Graph = ({ params, polls }) => {
-  if (!polls) return <div>Loading...</div>;
+// Keeps color change of chart gradual
+const makeColorForGraph = (index, total) => {
+  const increment = Math.floor(255 / total);
+  return `rgba(${index * increment}, 110, 200, 0.8)`;
+};
 
+const Graph = ({ params, polls }) => {
   const votes = polls
     .find(poll => poll._id === params.pollId).options;
 
@@ -28,11 +32,12 @@ const Graph = ({ params, polls }) => {
             const d = arc()
               .innerRadius(innerRadius)
               .outerRadius(outerRadius);
-            const style = {
-              transform: `translate(${height / 2}px, ${width / 2}px)`
+            const fill = {
+              transform: `translate(${height / 2}px, ${width / 2}px)`,
+              fill: makeColorForGraph(i, arr.length)
             };
             return (
-              <path key={i} className={'pie-piece-' + (i + 1)} d={d(data)} style={style} title={votes[i].title}>
+              <path key={i} className="pie-piece" d={d(data)} style={fill}>
                 <title>{votes[i].title}: {data.value}</title>
               </path>
             );
@@ -52,11 +57,14 @@ const Graph = ({ params, polls }) => {
         </thead>
         <tbody>
           {votes
-            .map((option, i) => {
+            .map((option, i, arr) => {
+              const squareColor = {
+                background: makeColorForGraph(i, arr.length)
+              };
               return (
                 <tr key={i} className="legend-row">
                   <td className="legend-cell">
-                    <div className={`legend-square pie-piece-${(i + 1)}`} />
+                    <div style={squareColor} className="legend-square pie-piece" />
                   </td>
                   <td className="legend-cell legend-title">
                     {option.title}

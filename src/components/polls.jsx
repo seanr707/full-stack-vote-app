@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Poll, Toolbar } from './index';
+import { Poll } from './index';
 
 const Polls = ({ polls, dispatch }) => {
-  if (!polls) return <div>Loading...</div>;
+  if (!polls || polls.size === 0) return <div className="container">Loading...</div>;
 
   return (
     <div className="container">
@@ -15,7 +15,6 @@ const Polls = ({ polls, dispatch }) => {
           );
         })}
       </div>
-      <Toolbar />
     </div>
   );
 };
