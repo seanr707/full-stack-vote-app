@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -12,79 +12,21 @@ const Toolbar = ({ user, dispatch }) => {
     thunkBind.getAllPolls();
   };
 
-  const newClick = () => {
-    thunkBind.postPoll({
-      title: 'New poll',
-      desc: 'Uses thunk',
-      author: {
-        id: user._id,
-        name: user.name
-      },
-      options: [
-        {
-          title: Math.floor(Math.random() * 100).toString(),
-          votes: 0
-        },
-        {
-          title: Math.floor(Math.random() * 100).toString(),
-          votes: 0
-        },
-        {
-          title: Math.floor(Math.random() * 100).toString(),
-          votes: 0
-        },
-        {
-          title: Math.floor(Math.random() * 100).toString(),
-          votes: 0
-        },
-        {
-          title: Math.floor(Math.random() * 100).toString(),
-          votes: 0
-        },
-        {
-          title: Math.floor(Math.random() * 100).toString(),
-          votes: 0
-        },
-        {
-          title: Math.floor(Math.random() * 100).toString(),
-          votes: 0
-        },
-        {
-          title: Math.floor(Math.random() * 100).toString(),
-          votes: 0
-        },
-        {
-          title: Math.floor(Math.random() * 100).toString(),
-          votes: 0
-        },
-        {
-          title: Math.floor(Math.random() * 100).toString(),
-          votes: 0
-        },
-        {
-          title: Math.floor(Math.random() * 100).toString(),
-          votes: 0
-        },
-        {
-          title: Math.floor(Math.random() * 100).toString(),
-          votes: 0
-        }
-      ]
-    });
-  };
-
   return (
     <div className="toolbar">
-      <div className="toolbar-container">
-        <div className="toolbar-item" onClick={getClick}>
+      <div className="toolbar-container row">
+        <div className="toolbar-item col-4" onClick={() => browserHistory.goBack()}>
+          ◀
+        </div>
+        <div className="toolbar-item col-4" onClick={getClick}>
           ↻
         </div>
         {user
-          ? <Link to="/page/submit">
-            <div className="toolbar-item">
+          ? <div className="toolbar-item col-4">
+            <Link to="/page/submit">
               +
-            </div>
-          </Link>
+            </Link>
+          </div>
           : null
         }
       </div>
