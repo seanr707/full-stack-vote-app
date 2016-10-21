@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
@@ -22,17 +22,41 @@ class EditPost extends React.Component {
   constructor(props) {
     super(props);
     this.props = props;
+    const { polls, params } = props;
+    this.state = {
+      ready: false,
+      pollOptions: []
+    };
+    setTimeout(() => {
+      const poll = this.props.polls.find(poll => poll._id === params.pollId);
+      this.setState({
+        ready: true,
+        pollOptions: poll.options
+      });
+    }, 1000);
+  }
+
+  static propTypes() {
+    return {
+      polls: PropTypes.Array.isRequired,
+      user: PropTypes.Object,
+      dispatch: PropTypes.func.isRequired,
+      params: PropTypes.Object.isRequired
+    };
+  }
+
+  updatePollOptions(options) {
+    this.setState({ pollOptions: options });
   }
 
   render() {
     const { polls, user, dispatch, params } = this.props;
 
-    if (!polls || polls.size === 0) return <div className="container">Loading</div>;
+    if (!this.state.ready) return <div className="container">Loading</div>;
 
     const thunkBind = bindActionCreators(thunkActions, dispatch);
 
     const poll = polls.find(poll => poll._id === params.pollId);
-    const pollOptions = poll.options;
 
     let title;
     let desc;
@@ -82,6 +106,17 @@ class EditPost extends React.Component {
       }
     };
 
+    const removeOption = e => {
+      console.log(e.target.dataset.index);
+      this.setState({
+        pollOptions: this.state.pollOptions.filter((option, i) => {
+          console.log(parseInt(e.target.getAttribute('data-index')) !== i);
+          console.log(i);
+          return parseInt(e.target.dataset.index) !== i;
+        })
+      });
+    };
+
     return (
       <div className="container">
         <div className="page-main">
@@ -106,12 +141,42 @@ class EditPost extends React.Component {
                 Options:
               </label>
               <div className="col-6">
-                {pollOptions.map((option, i) => {
-                  return <input key={i} ref={node => { options.push(node); }} data-id={option._id} className="poll-submit-input" defaultValue={option.title} />;
+                {this.state.pollOptions.map((option, i) => {
+                  console.log(options);
+                  return (
+                    <div key={i}>
+                      <input
+                        ref={node =>  options.push(node)}
+                        data-id={option._id}
+                        className="poll-submit-input"
+                        value={option.title}
+                        onChange={e => {
+                          const temp = Object.assign({}, option, {
+                            title: e.target.value
+                          });
+                          this.updatePollOptions(this.state.pollOptions.map(option2 => {
+                            if (option._id === option2._id) return temp;
+                            return option2;
+                          }));
+                        }}
+                      />
+                      <button
+                        type="button"
+                        className="option-delete"
+                        data-index={i}
+                        onClick={removeOption}
+                      >
+                        x
+                      </button>
+                    </div>
+                  );
                 })}
                 <button type="button" onClick={() => {
-                  pollOptions.push({title: ''});
-                  return this.forceUpdate();
+                  this.setState({
+                    pollOptions: this.state.pollOptions.concat({
+                      title: ''
+                    })
+                  });
                 }}>
                   +
                 </button>
