@@ -9,9 +9,22 @@ export default (app, models) => {
     })
     .put(jsonParser, (req, res) => {
       const id = { _id: req.params.pollId };
+      console.log(req.body.update);
       const update = Object.assign({}, req.body.update, {
-        dateUpdated: Date.now()
+        dateUpdated: Date.now(),
+        options: req.body.update.options.map(option => {
+          if (!option._id) {
+            return new models.PollOption({
+              title: option.title,
+              votes: 0
+            });
+          }
+
+          return option;
+        })
       });
+
+      console.log(update);
 
       return models.Poll.findOneAndUpdate(id, update, { new: true }, callback(res));
     })

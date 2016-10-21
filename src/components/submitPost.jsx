@@ -5,6 +5,13 @@ import { browserHistory } from 'react-router';
 
 import { thunkActions } from '../actions';
 
+const noRepeats = str => {
+  const arr = str.split(/,\s?/g);
+  return arr
+    .map((n, i, a) => a.filter(m => m.toLowerCase() === n.toLowerCase()))
+    .filter(a => a.length > 1).length > 0;
+};
+
 const SubmitPost = ({ user, dispatch }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
 
@@ -18,6 +25,8 @@ const SubmitPost = ({ user, dispatch }) => {
 
     if (!title.value.trim() || !desc.value.trim() || !options.value.trim()) {
       return;
+    } else if (noRepeats(options.value)) {
+      alert('You cannot have the same name for two entries');
     } else {
       thunkBind.postPoll({
         title: title.value,
