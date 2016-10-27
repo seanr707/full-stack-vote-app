@@ -72,6 +72,22 @@ button:focus {
   }
 }
 
+@mixin makeBtnRound($size, $background) {
+  height: $size;
+  width: $size;
+  background: $background;
+  // border: 1px solid darken($background, 10);
+  font-size: $size * 0.65;
+
+  &:hover {
+    background: darken($background, 5);
+  }
+
+  &:active {
+    background: lighten($background, 10);
+  }
+}
+
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -202,10 +218,42 @@ button:focus {
   margin: 5px;
   background: none;
   border: none;
+  cursor: pointer;
 }
 
 .btn-default {
   @include makeBtn(#eaeaea, #444444);
+}
+
+.btn-round {
+  border-radius: 100%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  border: none;
+  color: #fdfdfd;
+  font-family: monospace;
+  margin: 5px auto;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.btn-round-add {
+  @include makeBtnRound(32px, #33cc39);
+  display: block;
+  font-weight: bold;
+}
+
+.clickable-clear {
+  background: none;
+  border:none;
+  color: #646464;
+  display: inline-block;
+  margin: 0 4px;
+  cursor: pointer;
+  transition: color 0.5s ease;
+
+  &:hover {
+    color: #333333;
+  }
 }
 
 .toolbar {
@@ -287,12 +335,23 @@ button:focus {
   }
 }
 
+.input-container {
+  text-align: left;
+}
+
+#input-add {
+  width: 75%;
+}
+
 .poll-submit-input {
+  width: 75%;
   padding: 10px;
   margin: 6px 0;
   background: #e8e8e8;
   color: #333333;
-  border: #8f8f8f;
+  // Too dark
+  // border: 1px solid #8f8f8f;
+  border: none;
   border-radius: 2px;
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4);
   transition: background 0.2s ease;

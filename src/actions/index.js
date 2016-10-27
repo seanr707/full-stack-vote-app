@@ -6,7 +6,9 @@ export const actionTypes = {
   UPDATE_POLL: 'UPDATE_POLL',
   UPDATE_POLLS: 'UPDATE_POLLS',
   LOGIN: 'LOGIN',
-  LOGOUT: 'LOGOUT'
+  LOGOUT: 'LOGOUT',
+  STORE_OPTION_INPUT: 'STORE_OPTION_INPUT',
+  CLEAR_OPTION_INPUT: 'CLEAR_OPTION_INPUT'
 };
 
 export const actions = {
@@ -45,6 +47,17 @@ export const actions = {
   logout: () => {
     return {
       type: actionTypes.LOGOUT
+    };
+  },
+  storeOptionInput: (input) => {
+    return {
+      type: actionTypes.STORE_OPTION_INPUT,
+      input
+    };
+  },
+  clearOptionInput: () => {
+    return {
+      type: actionTypes.CLEAR_OPTION_INPUT
     };
   }
 };
