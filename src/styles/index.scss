@@ -286,12 +286,18 @@ button:focus {
   font-family: monospace;
   font-size: 32px;
   font-weight: bold;
+  background: none;
+  border: none;
   color: #484848;
   cursor: pointer;
   transition: color 0.2s ease;
 
   &:hover {
     color: #212121;
+  }
+
+  &:disabled {
+    opacity: 0;
   }
 }
 
