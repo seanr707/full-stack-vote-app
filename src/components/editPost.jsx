@@ -132,17 +132,13 @@ class EditPost extends React.Component {
               <label className="col-4">
                 Title:
               </label>
-              <div className="col-6 input-container">
-                <input ref={node => { title = node; }} className="poll-submit-input" defaultValue={poll.title} required />
-              </div>
+              <input ref={node => { title = node; }} className="poll-submit-input col-6" defaultValue={poll.title} required />
             </div>
             <div id="input-desc" className="labeled-input row">
               <label className="col-4">
                 { window.screen.availWidth < 500 ? 'Desc:' : 'Description:' }
               </label>
-              <div className="col-6 input-container">
-                <textarea ref={node => { desc = node; }} className="poll-submit-input" defaultValue={poll.desc} />
-              </div>
+              <textarea ref={node => { desc = node; }} className="poll-submit-input col-6" defaultValue={poll.desc} />
             </div>
             <div id="input-options" className="labeled-input row">
               <label className="col-4">
@@ -155,7 +151,7 @@ class EditPost extends React.Component {
                       <input
                         ref={node => options.push(node)}
                         data-id={option._id}
-                        className="poll-submit-input"
+                        className="poll-submit-input option-input"
                         value={option.title}
                         onChange={updateOptionInput(i)}
                         required

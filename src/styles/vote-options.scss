@@ -1,0 +1,47 @@
+.options {
+  display: inline-block;
+  text-align: center;
+  padding: 15px;
+}
+
+.option-container {
+  margin: 10px auto;
+
+  & input[type=radio] {
+    display: none;
+  }
+}
+
+.option {
+  $optionColor: rgba(255, 80, 20, 0.7);
+  $optionSelectedColor: rgba(255, 120, 20, 1);
+  display: block;
+  min-width: 75px;
+  padding: 10px;
+  background: $optionColor;
+  color: #fefefe;
+  border-radius: 3px;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+
+  &:active {
+    background: lighten($optionColor, 10);
+  }
+
+  input[type=radio]:checked + & {
+    background: $optionSelectedColor;
+
+    &:hover {
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    }
+
+    &:active {
+      background: lighten($optionSelectedColor, 10);
+    }
+  }
+}
