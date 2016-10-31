@@ -16,10 +16,12 @@ const Comment = ({ comment }) => {
   const date = new Date(comment.dateAdded);
 
   return (
-    <div className="comment">
-      <p dangerouslySetInnerHTML={markupPoll(comment.text)} />
-      <p>{date.toLocaleString()}</p>
-      <p>{comment.author.name}</p>
+    <div className="comment-container">
+      <p className="comment-body" dangerouslySetInnerHTML={markupPoll(comment.text)} />
+      <div className="comment-foot">
+        <span id="comment-author" className="comment-foot-item">{comment.author.name}</span>
+        <span id="comment-date" className="comment-foot-item right">{date.toLocaleString()}</span>
+      </div>
     </div>
   );
 };
@@ -55,7 +57,12 @@ const Comments = ({ pollId, comments, user, dispatch }) => {
       }
       <form onSubmit={postComment} className="input-container-comments">
         <div id="comment-input" className="comment-input-container">
-          <textarea className="poll-submit-input" ref={node => { commentText = node; }} placeholder="Comment..." />
+          <textarea
+            className="poll-submit-input"
+            ref={node => { commentText = node; }}
+            placeholder="Comment..."
+            required
+          />
         </div>
         <div className="comment-input-container">
           <button type="submit" id="comment-submit" className="btn btn-submit">Submit</button>

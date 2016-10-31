@@ -26,9 +26,23 @@
   background: white;
 }
 
-.comment {
+.comment-container {
   border-bottom: 1px solid #cccccc;
   padding: 10px;
+}
+
+.comment-body {
+  padding: 2px 10px;
+  color: #343434;
+}
+
+.comment-foot {
+  padding: 3px;
+}
+
+.comment-foot-item {
+  font-size: 10px;
+  color: #8f8f8f;
 }
 
 #comment-input {
@@ -38,4 +52,8 @@
 
 #comment-submit {
   margin: 35px 0;
+}
+
+#comment-author {
+  font-weight: bold;
 }
