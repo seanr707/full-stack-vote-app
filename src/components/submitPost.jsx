@@ -64,19 +64,25 @@ const SubmitPost = ({ user, dispatch }) => {
             <label className="col-4">
               Title:
             </label>
-            <input ref={node => { title = node; }} className="poll-submit-input col-6" placeholder="Favorite color?" />
+            <div className="input-container col-7">
+              <input ref={node => { title = node; }} className="poll-submit-input" placeholder="Favorite color?" />
+            </div>
           </div>
           <div className="labeled-input row">
             <label className="col-4">
               { window.screen.availWidth < 500 ? 'Desc:' : 'Description:' }
             </label>
-            <textarea ref={node => { desc = node; }} className="poll-submit-input col-6" placeholder="Use markdown to describe your poll." />
+            <div className="input-container col-7">
+              <textarea ref={node => { desc = node; }} className="poll-submit-input" placeholder="Use markdown to describe your poll." />
+            </div>
           </div>
           <div className="labeled-input row">
             <label className="col-4">
               Options:
             </label>
-            <input ref={node => { options = node; }} title="Separate by comma" className="poll-submit-input col-6" placeholder="Red, blue, green, yellow" />
+            <div className="input-container col-7">
+              <input ref={node => { options = node; }} title="Separate by comma" className="poll-submit-input" placeholder="Red, blue, green, yellow" />
+            </div>
           </div>
           <div className="labeled-input row">
             <label htmlFor="checkbox" className="col-4 center" title="One vote per logged in user">

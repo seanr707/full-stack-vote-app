@@ -8,7 +8,7 @@ textarea {
 
   label {
     font-weight: bold;
-    margin: 3px 5px;
+    margin: 15px 0px;
     text-align: right;
   }
 }
@@ -22,6 +22,7 @@ textarea {
 }
 
 .poll-submit-input {
+  width: 100%;
   padding: 10px;
   margin: 6px 0;
   background: #e8e8e8;
@@ -41,7 +42,7 @@ textarea {
 }
 
 .poll-submit-checkbox {
-  margin: 20px 0;
+  margin-top: 35px;
 }
 
 .option-input {

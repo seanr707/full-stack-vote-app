@@ -132,19 +132,23 @@ class EditPost extends React.Component {
               <label className="col-4">
                 Title:
               </label>
-              <input ref={node => { title = node; }} className="poll-submit-input col-6" defaultValue={poll.title} required />
+              <div className="input-container col-7">
+                <input ref={node => { title = node; }} className="poll-submit-input" defaultValue={poll.title} required />
+              </div>
             </div>
             <div id="input-desc" className="labeled-input row">
               <label className="col-4">
                 { window.screen.availWidth < 500 ? 'Desc:' : 'Description:' }
               </label>
-              <textarea ref={node => { desc = node; }} className="poll-submit-input col-6" defaultValue={poll.desc} />
+              <div className="input-container col-7">
+                <textarea ref={node => { desc = node; }} className="poll-submit-input" defaultValue={poll.desc} />
+              </div>
             </div>
             <div id="input-options" className="labeled-input row">
               <label className="col-4">
                 Options:
               </label>
-              <div className="col-6 input-container">
+              <div className="input-container col-7">
                 {storedInput.map((option, i) => {
                   return (
                     <div key={i}>
