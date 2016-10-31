@@ -115,7 +115,7 @@ export const thunkActions = {
   addComment: (id, comment) => {
     return dispatch => {
       axios.post(`/poll/id/${id}/comments`, { comment }).then(
-        res => dispatch(thunkActions.getAllPolls()),
+        res => dispatch(actions.updatePoll(res.data)),
         err => console.error(err)
       );
     };
