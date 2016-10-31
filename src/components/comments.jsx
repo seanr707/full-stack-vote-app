@@ -2,8 +2,13 @@ import React from 'react';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import marked from 'marked';
 
 import { thunkActions } from '../actions';
+
+const markupPoll = desc => {
+  return { __html: marked(desc, { sanitize: true }) };
+};
 
 const Comment = ({ comment }) => {
   if (!comment) return null;
@@ -12,9 +17,9 @@ const Comment = ({ comment }) => {
 
   return (
     <div className="comment">
-      <p>{comment.text}</p>
+      <p dangerouslySetInnerHTML={markupPoll(comment.text)} />
       <p>{date.toLocaleString()}</p>
-      <p>By: {comment.author.name}</p>
+      <p>{comment.author.name}</p>
     </div>
   );
 };
@@ -48,9 +53,13 @@ const Comments = ({ pollId, comments, user, dispatch }) => {
         ? comments.map((comment, i) => <Comment comment={comment} key={i} />)
         : null
       }
-      <form onSubmit={postComment}>
-        <input ref={node => { commentText = node; }}placeholder="Comment..." />
-        <button type="submit">Submit</button>
+      <form onSubmit={postComment} className="input-container-comments">
+        <div id="comment-input" className="comment-input-container">
+          <textarea className="poll-submit-input" ref={node => { commentText = node; }} placeholder="Comment..." />
+        </div>
+        <div className="comment-input-container">
+          <button type="submit" id="comment-submit" className="btn btn-submit">Submit</button>
+        </div>
       </form>
     </div>
   );
