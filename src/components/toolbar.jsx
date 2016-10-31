@@ -8,35 +8,28 @@ import { thunkActions } from '../actions';
 const Toolbar = ({ currentRoute, user, dispatch }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
 
-  const backClick = () => {
-    if (currentRoute === '/') return null;
-
-    return browserHistory.goBack();
-  };
-
-  const getClick = () => {
-    thunkBind.getAllPolls();
-  };
+  const backClick = () => browserHistory.goBack();
+  const getClick = () => thunkBind.getAllPolls();
 
   return (
-    <div className="toolbar">
+    <nav className="toolbar">
       <div className="toolbar-container row">
-        <div className="toolbar-item col-4" onClick={backClick}>
+        <button className="toolbar-item col-4" onClick={backClick} disabled={currentRoute === '/'}>
           ◀
-        </div>
-        <div className="toolbar-item col-4" onClick={getClick}>
+        </button>
+        <button className="toolbar-item col-4" onClick={getClick}>
           ↻
-        </div>
+        </button>
         {user
-          ? <div className="toolbar-item col-4">
+          ? <button className="toolbar-item col-4">
             <Link to="/page/submit">
               +
             </Link>
-          </div>
+          </button>
           : null
         }
       </div>
-    </div>
+    </nav>
   );
 };
 

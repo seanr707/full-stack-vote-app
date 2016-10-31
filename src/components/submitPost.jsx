@@ -5,7 +5,14 @@ import { browserHistory } from 'react-router';
 
 import { thunkActions } from '../actions';
 
-const SubmitPost = ({ user, dispatch, params }) => {
+const noRepeats = str => {
+  const arr = str.split(/,\s?/g);
+  return arr
+    .map((n, i, a) => a.filter(m => m.toLowerCase() === n.toLowerCase()))
+    .filter(a => a.length > 1).length > 0;
+};
+
+const SubmitPost = ({ user, dispatch }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
 
   let title;
@@ -18,8 +25,9 @@ const SubmitPost = ({ user, dispatch, params }) => {
 
     if (!title.value.trim() || !desc.value.trim() || !options.value.trim()) {
       return;
+    } else if (noRepeats(options.value)) {
+      alert('You cannot have the same name for two entries');
     } else {
-      console.log(authRequired.checked);
       thunkBind.postPoll({
         title: title.value,
         desc: desc.value,
@@ -56,19 +64,25 @@ const SubmitPost = ({ user, dispatch, params }) => {
             <label className="col-4">
               Title:
             </label>
-            <input ref={node => { title = node; }} className="poll-submit-input col-6" placeholder="Favorite color?" />
+            <div className="input-container col-7">
+              <input ref={node => { title = node; }} className="poll-submit-input" placeholder="Favorite color?" />
+            </div>
           </div>
           <div className="labeled-input row">
             <label className="col-4">
               { window.screen.availWidth < 500 ? 'Desc:' : 'Description:' }
             </label>
-            <textarea ref={node => { desc = node; }} className="poll-submit-input col-6" placeholder="Use markdown to describe your poll." />
+            <div className="input-container col-7">
+              <textarea ref={node => { desc = node; }} className="poll-submit-input" placeholder="Use markdown to describe your poll." />
+            </div>
           </div>
           <div className="labeled-input row">
             <label className="col-4">
               Options:
             </label>
-            <input ref={node => { options = node; }} title="Separate by comma" className="poll-submit-input col-6" placeholder="Red, blue, green, yellow" />
+            <div className="input-container col-7">
+              <input ref={node => { options = node; }} title="Separate by comma" className="poll-submit-input" placeholder="Red, blue, green, yellow" />
+            </div>
           </div>
           <div className="labeled-input row">
             <label htmlFor="checkbox" className="col-4 center" title="One vote per logged in user">

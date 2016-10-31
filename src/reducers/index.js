@@ -4,6 +4,7 @@ import { actionTypes } from '../actions';
 
 const initialState = Map({
   polls: null,
+  storedInput: null,
   user: null
 });
 
@@ -21,6 +22,8 @@ const reducer = (state = initialState, action) => {
     return state.set('user', action.user);
   case actionTypes.LOGOUT:
     return state.set('user', null);
+  case actionTypes.STORE_OPTION_INPUT:
+    return state.set('storedInput', List(action.input));
   default:
     console.log(state);
     return state;
