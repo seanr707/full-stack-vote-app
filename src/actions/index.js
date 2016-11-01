@@ -120,6 +120,14 @@ export const thunkActions = {
       );
     };
   },
+  deleteComment: (pollId, commentId) => {
+    return dispatch => {
+      axios.delete(`/poll/id/${pollId}/comments/${commentId}`).then(
+        res => dispatch(actions.updatePoll(res.data)),
+        err => console.error(err)
+      );
+    };
+  },
   verifyUser: (id) => {
     return dispatch => {
       return axios.get('/auth/check').then(

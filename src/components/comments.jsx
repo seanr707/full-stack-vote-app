@@ -10,14 +10,21 @@ const markupPoll = desc => {
   return { __html: marked(desc, { sanitize: true }) };
 };
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, removeComment, owner }) => {
   if (!comment) return null;
 
   const date = new Date(comment.dateAdded);
 
+  const ownerButtons = (
+    <div className="btn-container">
+      <button type="button" className="btn btn-default" onClick={() => removeComment(comment._id)}>Delete</button>
+    </div>
+  );
+
   return (
     <div className="comment-container">
       <p className="comment-body" dangerouslySetInnerHTML={markupPoll(comment.text)} />
+      {owner ? ownerButtons : null}
       <div className="comment-foot">
         <span id="comment-author" className="comment-foot-item">{comment.author.name}</span>
         <span id="comment-date" className="comment-foot-item right">{date.toLocaleString()}</span>
@@ -47,12 +54,14 @@ const Comments = ({ pollId, comments, user, dispatch }) => {
     });
   };
 
+  const deleteComment = pollId => commentId => thunkBind.deleteComment(pollId, commentId);
+
   let commentText;
 
   return (
     <div className="comments">
       {comments
-        ? comments.map((comment, i) => <Comment comment={comment} key={i} />)
+        ? comments.map((comment, i) => <Comment comment={comment} owner={user._id === comment.author.id} removeComment={deleteComment(pollId)} key={i} />)
         : null
       }
       <form onSubmit={postComment} className="input-container-comments">
