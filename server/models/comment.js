@@ -4,11 +4,13 @@ export default mongoose.Schema({
   text: String,
   author: {
     id: mongoose.Schema.Types.ObjectId,
-    name: String
+    name: String,
+    username: String
   },
   votes: {
     up: Number,
     down: Number
   },
-  dateAdded: Number
+  dateAdded: Number,
+  dateUpdated: Number
 });

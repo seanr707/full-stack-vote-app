@@ -21,7 +21,9 @@ export default (app, models) => {
       id,
       {
         $set: {
-          comments: req.body.update
+          comments: Object.assign({}, req.body.update, {
+            dateUpdated: Date.now()
+          })
         }
       },
       { new: true },

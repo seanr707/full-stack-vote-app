@@ -29,7 +29,7 @@ const Comment = ({ comment, link, commentActions, owner }) => {
       <p className="comment-body" dangerouslySetInnerHTML={markupPoll(comment.text)} />
       {owner ? ownerButtons : null}
       <div className="comment-foot">
-        <span id="comment-author" className="comment-foot-item">{comment.author.name}</span>
+        <span id="comment-author" className="comment-foot-item">{comment.author.name} (@{comment.author.username})</span>
         <span id="comment-date" className="comment-foot-item right">{date.toLocaleString()}</span>
       </div>
     </div>
@@ -46,7 +46,8 @@ const Comments = ({ pollId, comments, user, params, dispatch }) => {
     thunkBind.addComment(pollId, {
       author: {
         id: user._id,
-        name: user.name
+        name: user.name,
+        username: user.screenName
       },
       votes: {
         up: 0,

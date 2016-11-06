@@ -33,7 +33,8 @@ const SubmitPost = ({ user, dispatch }) => {
         desc: desc.value,
         author: {
           id: user._id,
-          name: user.name
+          name: user.name,
+          username: user.screenName
         },
         // votes property added on server
         options: options.value.split(/,\s?/g).map(option => {

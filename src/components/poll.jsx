@@ -24,7 +24,7 @@ const Poll = ({ poll, dispatch }) => {
           {poll.title}
         </h3>
         <div className="poll-info-container col-4">
-          <div className="poll-info-item">By {poll.author.name}</div>
+          <div className="poll-info-item">{poll.author.name} (@{poll.author.username})</div>
           <div className="poll-info-item">{date}</div>
         </div>
       </Link>
