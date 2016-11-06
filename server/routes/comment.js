@@ -7,7 +7,17 @@ export default (app, models) => {
 
       models.Poll.findByIdAndUpdate(
         id,
-        { $push: { comments: req.body.comment } },
+        {
+          $push: {
+            comments: Object.assign({}, req.body.comment, {
+              // Votes added here so client cannot buffer initial votes
+              votes: {
+                up: 0,
+                down: 0
+              }
+            })
+          }
+        },
         { new: true },
         callback(res)
       );
@@ -15,15 +25,17 @@ export default (app, models) => {
 
   app.route('/poll/id/:pollId/comments/:commentId')
   .put(jsonParser, (req, res) => {
-    const id = { _id: req.params.pollId };
+    const id = {
+      _id: req.params.pollId,
+      'comments._id': req.params.commentId
+    };
 
-    models.Poll.findByIdAndUpdate(
+    models.Poll.findOneAndUpdate(
       id,
       {
         $set: {
-          comments: Object.assign({}, req.body.update, {
-            dateUpdated: Date.now()
-          })
+          'comments.$.text': req.body.update.text,
+          'comments.$.dateUpdated': Date.now()
         }
       },
       { new: true },

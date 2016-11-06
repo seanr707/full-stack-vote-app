@@ -49,10 +49,6 @@ const Comments = ({ pollId, comments, user, params, dispatch }) => {
         name: user.name,
         username: user.screenName
       },
-      votes: {
-        up: 0,
-        down: 0
-      },
       text: commentText.value,
       dateAdded: Date.now()
     });

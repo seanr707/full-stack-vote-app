@@ -4,6 +4,11 @@ export const jsonParser = json();
 
 export const callback = (res) => {
   return (err, polls) => {
-    return res.send(err ? false : polls);
+    if (err) {
+      console.error(err);
+      return res.send(new Error('Issue with server, try again later.'));
+    }
+
+    return res.send(polls);
   };
 };
