@@ -55,6 +55,9 @@ const Comments = ({ pollId, comments, user, params, dispatch }) => {
       text: commentText.value,
       dateAdded: Date.now()
     });
+
+    // Clear out textarea
+    commentText.value = '';
   };
 
   const commentActions = (pollId, commentId) => {
