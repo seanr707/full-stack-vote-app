@@ -71,7 +71,8 @@ const Comments = ({ pollId, comments, user, params, dispatch }) => {
 
   return (
     <div className="comments">
-      {comments
+      { /* Displays nothing if there are no comments */
+        comments
         ? comments.map((comment, i) => {
           return (
             <Comment
@@ -85,19 +86,25 @@ const Comments = ({ pollId, comments, user, params, dispatch }) => {
         })
         : null
       }
-      <form onSubmit={postComment} className="input-container-comments">
-        <div id="comment-input" className="comment-input-container">
-          <textarea
-            className="poll-submit-input"
-            ref={node => { commentText = node; }}
-            placeholder="Comment..."
-            required
-          />
-        </div>
-        <div className="comment-input-container">
-          <button type="submit" id="comment-submit" className="btn btn-submit">Submit</button>
-        </div>
-      </form>
+      { /* Hides input if the user is not logged in */
+        user
+        ? (
+          <form onSubmit={postComment} className="input-container-comments">
+            <div id="comment-input" className="comment-input-container">
+              <textarea
+                className="poll-submit-input"
+                ref={node => { commentText = node; }}
+                placeholder="Comment..."
+                required
+              />
+            </div>
+            <div className="comment-input-container">
+              <button type="submit" id="comment-submit" className="btn btn-submit">Submit</button>
+            </div>
+          </form>
+        )
+        : <div className="container center">Login to comment</div>
+      }
     </div>
   );
 };
