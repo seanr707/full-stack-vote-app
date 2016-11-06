@@ -14,6 +14,20 @@ export default (app, models) => {
     });
 
   app.route('/poll/id/:pollId/comments/:commentId')
+  .put(jsonParser, (req, res) => {
+    const id = { _id: req.params.pollId };
+
+    models.Poll.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          comments: req.body.update
+        }
+      },
+      { new: true },
+      callback(res)
+    );
+  })
   .delete((req, res) => {
     const id = { _id: req.params.pollId };
 

@@ -10,14 +10,17 @@ const markupPoll = desc => {
   return { __html: marked(desc, { sanitize: true }) };
 };
 
-const Comment = ({ comment, removeComment, owner }) => {
+const Comment = ({ comment, link, commentActions, owner }) => {
   if (!comment) return null;
 
   const date = new Date(comment.dateAdded);
 
   const ownerButtons = (
     <div className="btn-container">
-      <button type="button" className="btn btn-default" onClick={() => removeComment(comment._id)}>Delete</button>
+      <Link to={link}>
+        <button type="button" className="btn btn-default">Edit</button>
+      </Link>
+      <button type="button" className="btn btn-default" onClick={commentActions.removeComment}>Delete</button>
     </div>
   );
 
@@ -33,7 +36,7 @@ const Comment = ({ comment, removeComment, owner }) => {
   );
 };
 
-const Comments = ({ pollId, comments, user, dispatch }) => {
+const Comments = ({ pollId, comments, user, params, dispatch }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
 
   const postComment = event => {
@@ -54,14 +57,29 @@ const Comments = ({ pollId, comments, user, dispatch }) => {
     });
   };
 
-  const deleteComment = pollId => commentId => thunkBind.deleteComment(pollId, commentId);
+  const commentActions = (pollId, commentId) => {
+    return {
+      removeComment: () => thunkBind.deleteComment(pollId, commentId),
+      updateComment: (text) => thunkBind.updateComment(pollId, commentId, text)
+    };
+  };
 
   let commentText;
 
   return (
     <div className="comments">
       {comments
-        ? comments.map((comment, i) => <Comment comment={comment} owner={user._id === comment.author.id} removeComment={deleteComment(pollId)} key={i} />)
+        ? comments.map((comment, i) => {
+          return (
+            <Comment
+              comment={comment}
+              owner={user._id === comment.author.id}
+              commentActions={commentActions(pollId, comment._id)}
+              link={`/page/poll/${pollId}/comments/${comment._id}/edit`}
+              key={i}
+            />
+          );
+        })
         : null
       }
       <form onSubmit={postComment} className="input-container-comments">

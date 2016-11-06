@@ -120,6 +120,14 @@ export const thunkActions = {
       );
     };
   },
+  updateComment: (pollId, commentId, text) => {
+    return dispatch => {
+      axios.put(`/poll/id/${pollId}/comments/${commentId}`, { update: text }).then(
+        res => dispatch(actions.updatePoll(res.data)),
+        err => console.error(err)
+      );
+    };
+  },
   deleteComment: (pollId, commentId) => {
     return dispatch => {
       axios.delete(`/poll/id/${pollId}/comments/${commentId}`).then(
