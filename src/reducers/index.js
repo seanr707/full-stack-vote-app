@@ -5,13 +5,14 @@ import { actionTypes } from '../actions';
 const initialState = Map({
   polls: null,
   storedInput: null,
-  user: null
+  user: null,
+  userView: null
 });
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
   case actionTypes.ADD_POLL:
-    return state.set('polls', state.get('polls').push(action.poll));
+    return state.set('polls', state.get('polls').reverse().push(action.poll).reverse());
   case actionTypes.UPDATE_POLL:
     return state.set('polls', state.get('polls').map(poll => {
       return action.poll._id === poll._id ? action.poll : poll;
@@ -24,6 +25,8 @@ const reducer = (state = initialState, action) => {
     return state.set('user', null);
   case actionTypes.STORE_OPTION_INPUT:
     return state.set('storedInput', List(action.input));
+  case actionTypes.STORE_USER_VIEW_INFO:
+    return state.set('userView', action.user);
   default:
     console.log(state);
     return state;

@@ -10,6 +10,7 @@ import pollPage from './pollPage.jsx';
 import polls from './polls.jsx';
 import submitPost from './submitPost.jsx';
 import toolbar from './toolbar.jsx';
+import userPage from './userPage.jsx';
 import votePage from './votePage.jsx';
 
 export const Main = main;
@@ -24,4 +25,5 @@ export const PollPage = pollPage;
 export const Polls = polls;
 export const SubmitPost = submitPost;
 export const Toolbar = toolbar;
+export const UserPage = userPage;
 export const VotePage = votePage;

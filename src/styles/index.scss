@@ -1,5 +1,6 @@
 @import "constants";
 @import "responsive-grid";
+@import "user";
 @import "navbar";
 @import "toolbar";
 @import "vote-options";
@@ -126,6 +127,17 @@ a {
 .poll-info-container {
   text-align: right;
   margin: 15px 0;
+}
+
+.tag {
+  padding: 5px;
+  margin: 0 4px;
+  font-size: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  color: #fefefe;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 .poll-info-item {

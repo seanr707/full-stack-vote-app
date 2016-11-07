@@ -40,7 +40,7 @@ export default (app, models) => {
       return models.Poll.find((err, polls) => {
         if (err) console.error(err);
 
-        return res.send(polls);
+        return res.send(polls.reverse());
       });
     })
     .post(jsonParser, (req, res) => {

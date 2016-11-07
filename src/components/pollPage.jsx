@@ -1,6 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import { thunkActions } from '../actions';
 
@@ -21,6 +22,9 @@ const Poll = ({ polls, user, dispatch, params, children }) => {
         <div className="poll-foot">
           <div style={{display: 'inline-block'}}>
             {poll.author.name}
+            <Link to={`/page/user/${poll.author.id}`}>
+              <span className="user-link">(@{poll.author.username})</span>
+            </Link>
           </div>
           <div style={{float: 'right'}}>
             {new Date(poll.dateUpdated).toLocaleString()}

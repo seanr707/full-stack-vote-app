@@ -21,10 +21,13 @@ const Poll = ({ poll, dispatch }) => {
     <div className="poll-tile row">
       <Link to={`/page/poll/${poll._id}`}>
         <h3 title={`"${poll.desc.substr(0, 20)}..."`} className="col-8">
+          { poll.authRequired ? <span className="tag">Verified</span> : null }
           {poll.title}
         </h3>
         <div className="poll-info-container col-4">
-          <div className="poll-info-item">{poll.author.name} (@{poll.author.username})</div>
+          <div className="poll-info-item">
+            {poll.author.name} (@{poll.author.username})
+          </div>
           <div className="poll-info-item">{date}</div>
         </div>
       </Link>
