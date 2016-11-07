@@ -113,7 +113,7 @@ export const thunkActions = {
       console.log('updating polls...');
       return axios.get('/polls').then(
         // Reverse order so it starts with the newest on top
-        res => dispatch(actions.updateAllPolls(res.data.reverse())),
+        res => dispatch(actions.updateAllPolls(res.data)),
         err => console.error(err)
       );
     };

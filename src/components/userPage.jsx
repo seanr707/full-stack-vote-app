@@ -46,7 +46,7 @@ const UserPoll = ({ poll }) => {
   );
 };
 
-const UserPage = ({ userView, dispatch, params }) => {
+const UserPage = ({ user, userView, dispatch, params }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
   thunkBind.getUserView(params.userId);
   // If this loads initially, then we need to wait for Promise Thunk to return
@@ -75,15 +75,21 @@ const UserPage = ({ userView, dispatch, params }) => {
           </div>
         </div>
       </div>
-      <div className="comments">
-        { userView.polls.map((poll, i) => <UserPoll poll={poll} key={i} />) }
-      </div>
+      {
+        !user || user._id === userView.user._id
+        ? (
+          <div className="comments">
+            { userView.polls.map((poll, i) => <UserPoll poll={poll} key={i} />) }
+          </div>
+        ) : null
+      }
     </div>
   );
 };
 
 const mapStateToProps = state => {
   return {
+    user: state.reducer.get('user'),
     userView: state.reducer.get('userView')
   };
 };
