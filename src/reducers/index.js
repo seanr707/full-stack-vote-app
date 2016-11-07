@@ -12,7 +12,7 @@ const initialState = Map({
 const reducer = (state = initialState, action) => {
   switch (action.type) {
   case actionTypes.ADD_POLL:
-    return state.set('polls', state.get('polls').push(action.poll));
+    return state.set('polls', state.get('polls').reverse().push(action.poll).reverse());
   case actionTypes.UPDATE_POLL:
     return state.set('polls', state.get('polls').map(poll => {
       return action.poll._id === poll._id ? action.poll : poll;

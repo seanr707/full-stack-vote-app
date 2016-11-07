@@ -29,6 +29,14 @@
   }
 }
 
+.user-link {
+  margin: 0 3px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 #top-options {
   max-width: 400px;
   margin: 10px auto;

@@ -29,7 +29,12 @@ const Comment = ({ comment, link, commentActions, owner }) => {
       <p className="comment-body" dangerouslySetInnerHTML={markupPoll(comment.text)} />
       {owner ? ownerButtons : null}
       <div className="comment-foot">
-        <span id="comment-author" className="comment-foot-item">{comment.author.name} (@{comment.author.username})</span>
+        <span id="comment-author" className="comment-foot-item">
+          {comment.author.name}
+          <Link to={`/page/user/${comment.author.id}`}>
+            <span className="user-link">(@{comment.author.username})</span>
+          </Link>
+        </span>
         <span id="comment-date" className="comment-foot-item right">{date.toLocaleString()}</span>
       </div>
     </div>
