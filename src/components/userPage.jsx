@@ -76,7 +76,7 @@ const UserPage = ({ user, userView, dispatch, params }) => {
         </div>
       </div>
       {
-        !user || user._id === userView.user._id
+        user && user._id === params.userId
         ? (
           <div className="comments">
             { userView.polls.map((poll, i) => <UserPoll poll={poll} key={i} />) }
