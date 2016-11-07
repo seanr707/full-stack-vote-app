@@ -26,7 +26,7 @@ export default (app, models) => {
           pollsVoted: user.pollsVoted
         };
 
-        return res.send({ user: sentUser, polls });
+        return res.send({ user: sentUser, polls: polls.reverse() });
       });
     });
   });
