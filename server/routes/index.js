@@ -1,6 +1,7 @@
 import authRoute from './auth';
 import commentRoute from './comment';
 import pollRoute from './poll';
+import userRoute from './user';
 import voteRoute from './vote';
 
 export default (app, models) => {
@@ -15,6 +16,7 @@ export default (app, models) => {
   authRoute(app, models);
   commentRoute(app, models);
   pollRoute(app, models);
+  userRoute(app, models);
   voteRoute(app, models);
 
   // Route for debuggin purposes

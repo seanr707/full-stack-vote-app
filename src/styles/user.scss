@@ -1,0 +1,19 @@
+.user-polls {
+  margin: 0 auto;
+  border-collapse: collapse;
+  border: 1px solid $optionColor;
+
+  th, td {
+    padding: 5px;
+    min-width: 75px;
+  }
+
+  th {
+    background: $optionColor;
+    color: #fefefe;
+  }
+
+  tr:nth-child(even) {
+    background: lighten($optionColor, 30);
+  }
+}
