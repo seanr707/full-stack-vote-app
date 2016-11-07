@@ -9,7 +9,8 @@ const pollSchema = mongoose.Schema({
   desc: String,
   author: {
     id: mongoose.Schema.Types.ObjectId,
-    name: String
+    name: String,
+    username: String
   },
   authRequired: Boolean,
   dateAdded: Number,

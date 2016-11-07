@@ -115,7 +115,23 @@ export const thunkActions = {
   addComment: (id, comment) => {
     return dispatch => {
       axios.post(`/poll/id/${id}/comments`, { comment }).then(
-        res => dispatch(thunkActions.getAllPolls()),
+        res => dispatch(actions.updatePoll(res.data)),
+        err => console.error(err)
+      );
+    };
+  },
+  updateComment: (pollId, commentId, text) => {
+    return dispatch => {
+      axios.put(`/poll/id/${pollId}/comments/${commentId}`, { update: text }).then(
+        res => dispatch(actions.updatePoll(res.data)),
+        err => console.error(err)
+      );
+    };
+  },
+  deleteComment: (pollId, commentId) => {
+    return dispatch => {
+      axios.delete(`/poll/id/${pollId}/comments/${commentId}`).then(
+        res => dispatch(actions.updatePoll(res.data)),
         err => console.error(err)
       );
     };

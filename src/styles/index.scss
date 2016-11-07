@@ -4,6 +4,7 @@
 @import "toolbar";
 @import "vote-options";
 @import "graph";
+@import "comments";
 @import "forms";
 @import "buttons";
 
@@ -60,6 +61,9 @@ a {
 }
 
 .page-main {
+  // position and z-index adjusted so comments go below box
+  position: relative;
+  z-index: 2;
   border: 1px solid #aaaaaa;
   border-radius: 2px;
   background: white;
