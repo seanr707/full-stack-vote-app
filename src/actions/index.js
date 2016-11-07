@@ -8,7 +8,9 @@ export const actionTypes = {
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT',
   STORE_OPTION_INPUT: 'STORE_OPTION_INPUT',
-  CLEAR_OPTION_INPUT: 'CLEAR_OPTION_INPUT'
+  CLEAR_OPTION_INPUT: 'CLEAR_OPTION_INPUT',
+  STORE_USER_VIEW_INFO: 'STORE_USER_VIEW_INFO',
+  CLEAR_USER_VIEW_INFO: 'CLEAR_USER_VIEW_INFO'
 };
 
 export const actions = {
@@ -58,6 +60,17 @@ export const actions = {
   clearOptionInput: () => {
     return {
       type: actionTypes.CLEAR_OPTION_INPUT
+    };
+  },
+  storeUserViewInfo: (user) => {
+    return {
+      type: actionTypes.STORE_USER_VIEW_INFO,
+      user
+    };
+  },
+  clearUserViewInfo: () => {
+    return {
+      type: actionTypes.CLEAR_USER_VIEW_INFO
     };
   }
 };
@@ -132,6 +145,14 @@ export const thunkActions = {
     return dispatch => {
       axios.delete(`/poll/id/${pollId}/comments/${commentId}`).then(
         res => dispatch(actions.updatePoll(res.data)),
+        err => console.error(err)
+      );
+    };
+  },
+  getUserView: (userId) => {
+    return dispatch => {
+      axios.get(`/users/id/${userId}`).then(
+        res => dispatch(actions.storeUserViewInfo(res.data)),
         err => console.error(err)
       );
     };

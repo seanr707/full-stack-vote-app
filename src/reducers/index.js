@@ -5,7 +5,8 @@ import { actionTypes } from '../actions';
 const initialState = Map({
   polls: null,
   storedInput: null,
-  user: null
+  user: null,
+  userView: null
 });
 
 const reducer = (state = initialState, action) => {
@@ -24,6 +25,8 @@ const reducer = (state = initialState, action) => {
     return state.set('user', null);
   case actionTypes.STORE_OPTION_INPUT:
     return state.set('storedInput', List(action.input));
+  case actionTypes.STORE_USER_VIEW_INFO:
+    return state.set('userView', action.user);
   default:
     console.log(state);
     return state;
