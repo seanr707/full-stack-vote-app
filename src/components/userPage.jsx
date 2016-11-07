@@ -5,7 +5,48 @@ import { Link } from 'react-router';
 
 import { thunkActions } from '../actions';
 
-const User = ({ userView, dispatch, params, children }) => {
+const UserPoll = ({ poll }) => {
+  const date = new Date(poll.dateUpdated);
+
+  const totalVotes = poll.options.reduce((curr, next) => curr + next.votes, 0);
+  const sortedOptions = Object.assign([], poll.options).sort((a, b) => a.votes > b.votes).reverse().slice(0, 3);
+
+  return (
+    <div className="comment-container">
+      <div className="comment-body center">
+        <h2>
+          <Link to={`/page/poll/${poll._id}`}>
+            { poll.title }
+          </Link>
+        </h2>
+        <h4>Top 3 Options: </h4>
+        <div id="top-options">
+          { sortedOptions.map((option, i) => {
+            // Find percent of votes; if no votes yet, defaults to 0%
+            const percent = totalVotes === 0
+              ? 0 : Math.round((option.votes / totalVotes) * 100, 2);
+            return (
+              <div className="row" key={i}>
+                <div className="col-10">
+                  { option.title }
+                </div>
+                <div className="col-2">
+                  { `${percent}%`}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className="comment-foot">
+        <span id="comment-author" className="comment-foot-item">Total Votes: { totalVotes }</span>
+        <span id="comment-date" className="comment-foot-item right">{date.toLocaleString()}</span>
+      </div>
+    </div>
+  );
+};
+
+const UserPage = ({ userView, dispatch, params }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
   thunkBind.getUserView(params.userId);
   // If this loads initially, then we need to wait for Promise Thunk to return
@@ -24,49 +65,6 @@ const User = ({ userView, dispatch, params, children }) => {
             <h4>{userView.user.screenName}</h4>
             <h4>{userView.user.location}</h4>
           </div>
-          <div className="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>
-                    Poll
-                  </th>
-                  <th>
-                    Top Option
-                  </th>
-                  <th>
-                    Votes
-                  </th>
-                  <th>
-                    Total Votes
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                { userView.polls.reverse().map((poll, i) => {
-                  const topOption = poll.options.sort((a, b) => a.votes > b.votes).reverse()[0];
-                  return (
-                    <tr key={i}>
-                      <td>
-                        <Link to={`/page/poll/${poll._id}`}>
-                          { poll.title.length < 20 ? poll.title : poll.title.substr(0, 20) + '...' }
-                        </Link>
-                      </td>
-                      <td>
-                        { (topOption.title.length < 20 ? topOption.title : topOption.title.substr(0, 10) + '...') }
-                      </td>
-                      <td>
-                        { topOption.votes }
-                      </td>
-                      <td>
-                        { poll.options.reduce((curr, next) => curr + next.votes, 0) }
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
         </div>
         <div className="poll-foot">
           <div style={{display: 'inline-block'}}>
@@ -76,6 +74,9 @@ const User = ({ userView, dispatch, params, children }) => {
             {userView.user.pollsVoted.length}
           </div>
         </div>
+      </div>
+      <div className="comments">
+        { userView.polls.map((poll, i) => <UserPoll poll={poll} key={i} />) }
       </div>
     </div>
   );
@@ -87,4 +88,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(User);
+export default connect(mapStateToProps)(UserPage);
