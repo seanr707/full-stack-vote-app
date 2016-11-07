@@ -19,6 +19,16 @@
   }
 }
 
+.user-image {
+  max-width: 100px;
+  overflow: hidden;
+  margin: 10px auto;
+
+  img {
+    width: inherit;
+  }
+}
+
 #top-options {
   max-width: 400px;
   margin: 10px auto;

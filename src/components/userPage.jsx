@@ -68,10 +68,10 @@ const UserPage = ({ userView, dispatch, params }) => {
         </div>
         <div className="poll-foot">
           <div style={{display: 'inline-block'}}>
-            {userView.user.pollsCreated.length}
+            Polls Created: {userView.polls.length}
           </div>
           <div style={{float: 'right'}}>
-            {userView.user.pollsVoted.length}
+            Registered Votes: {userView.user.pollsVoted.length}
           </div>
         </div>
       </div>
