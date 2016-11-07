@@ -37,10 +37,13 @@
               <thead>
                 <tr>
                   <th>
-                    Title
+                    Poll
                   </th>
                   <th>
-                    Most Voted
+                    Top Option
+                  </th>
+                  <th>
+                    Votes
                   </th>
                   <th>
                     Total Votes
@@ -52,11 +55,15 @@
                   <tr>
                     <td>
                       <a target="_blank" href=<%= `/page/poll/${poll._id}` %>>
-                        <%= poll.title %>
+                        <%= poll.title.length < 20 ? poll.title : poll.title.substr(0, 20) + '...' %>
                       </a>
                     </td>
                     <td>
-                      <%= poll.options.sort((a, b) => a.votes > b.votes).reverse()[0].title + ': ' + poll.options[0].votes %>
+                      <% const option = poll.options.sort((a, b) => a.votes > b.votes).reverse()[0] %>
+                      <%= (option.title.length < 20 ? option.title : option.title.substr(0, 10) + '...')%>
+                    </td>
+                    <td>
+                      <%= option.votes %>
                     </td>
                     <td>
                       <%= poll.options.reduce((curr, next) => curr + next.votes, 0) %>
