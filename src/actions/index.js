@@ -107,6 +107,14 @@ export const thunkActions = {
       );
     };
   },
+  voteAdd: (pollId, optionText) => {
+    return dispatch => {
+      return axios.post(`/poll/id/${pollId}/vote`, { update: optionText }).then(
+        res => dispatch(actions.updatePoll(res.data)),
+        err => console.error(err)
+      );
+    };
+  },
   getAllPolls: () => {
     return dispatch => {
       dispatch(actions.updateAllPolls(null));

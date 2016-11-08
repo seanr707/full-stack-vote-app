@@ -1,4 +1,4 @@
-import { callback } from './utility';
+import { callback, jsonParser } from './utility';
 
 const verifiedPoll = (res, models, userId, poll, nextOptionId) => {
   return (err, user) => {
@@ -65,6 +65,24 @@ const verifiedPoll = (res, models, userId, poll, nextOptionId) => {
 };
 
 export default (app, models) => {
+  app.route('/poll/id/:pollId/vote')
+    .post(jsonParser, (req, res) => {
+      const id = { _id: req.params.pollId };
+
+      console.log(req.body.update);
+      models.Poll.findById(id, (err, poll) => {
+        if (err) return err;
+
+        // Currently not allowing verified polls to add new options
+        const update = poll.options.concat({
+          title: req.body.update,
+          votes: 1
+        });
+
+        models.Poll.findOneAndUpdate(id, { options: update }, { new: true }, callback(res));
+      });
+    });
+
   app.route('/poll/id/:pollId/vote/:voteId')
     .get((req, res) => {
       const id = { _id: req.params.pollId };
