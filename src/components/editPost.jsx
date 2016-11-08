@@ -5,6 +5,7 @@ import { browserHistory } from 'react-router';
 import axios from 'axios';
 
 import { actions, thunkActions } from '../actions';
+import { Loading } from './index';
 
 class EditPost extends React.Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class EditPost extends React.Component {
     const { storedInput, user, dispatch } = this.props;
 
     // Placeholder
-    if (!this.state.ready) return <div className="container">Loading...</div>;
+    if (!this.state.ready) return <Loading />;
 
     // Placeholder
     if (!user || user._id !== this.poll.author.id) {

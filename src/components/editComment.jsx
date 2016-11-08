@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import marked from 'marked';
 
 import { thunkActions } from '../actions';
+import { Loading } from './index';
 
 const markupPoll = desc => {
   return { __html: marked(desc, { sanitize: true }) };
@@ -21,7 +22,7 @@ class EditComment extends React.Component {
 
   render() {
     const { polls, user, params, dispatch } = this.props;
-    if (!polls) return <div className="container">Loading...</div>;
+    if (!polls) return <Loading />;
 
     let comment;
 

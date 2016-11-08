@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import { thunkActions } from '../actions';
+import { Loading } from './index';
 
 const UserPoll = ({ poll }) => {
   const date = new Date(poll.dateUpdated);
@@ -50,7 +51,7 @@ const UserPage = ({ user, userView, dispatch, params }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
   thunkBind.getUserView(params.userId);
   // If this loads initially, then we need to wait for Promise Thunk to return
-  if (!userView) return <div className="container">Loading...</div>;
+  if (!userView) return <Loading />;
 
   return (
     <div className="container">

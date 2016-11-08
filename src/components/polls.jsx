@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Poll } from './index';
+import { Loading, Poll } from './index';
 
 const Polls = ({ polls, dispatch }) => {
-  if (!polls || polls.size === 0) return <div className="container">Loading...</div>;
+  if (!polls || polls.size === 0) return <Loading />;
 
   return (
     <div className="container">

@@ -5,11 +5,11 @@ import { Link } from 'react-router';
 
 import { thunkActions } from '../actions';
 
-import { Comments } from './index';
+import { Comments, Loading } from './index';
 
 const Poll = ({ polls, user, dispatch, params, children }) => {
   // If this loads initially, then we need to wait for Promise Thunk to return
-  if (!polls || polls.size === 0) return <div className="container">Loading...</div>;
+  if (!polls || polls.size === 0) return <Loading />;
 
   const thunkBind = bindActionCreators(thunkActions, dispatch);
   const poll = polls.find(poll => poll._id === params.pollId);
