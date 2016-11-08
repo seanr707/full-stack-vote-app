@@ -21,7 +21,10 @@ const Navbar = ({ user, dispatch }) => {
   } else {
     userInfo = (
       <a href="/auth/twitter">
-        <div>Login</div>
+        <div className="login-btn-container">
+          <img className="login-btn-img" src="/public/img/twitter-logo-white.png" />
+          <span>Login</span>
+        </div>
       </a>
     );
   }

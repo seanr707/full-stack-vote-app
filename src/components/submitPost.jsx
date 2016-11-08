@@ -92,7 +92,7 @@ const SubmitPost = ({ user, dispatch }) => {
             <input id="checkbox" ref={node => { authRequired = node; }} type="checkbox" className="poll-submit-checkbox col-1" />
           </div>
           <div className="center">
-            <button className="btn btn-default" type="submit">Add Poll</button>
+            <button className="btn btn-submit" type="submit">Add Poll</button>
           </div>
         </form>
       </div>

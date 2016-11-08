@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import marked from 'marked';
 
 import { thunkActions } from '../actions';
+import { LoginButton } from './index';
 
 const markupPoll = desc => {
   return { __html: marked(desc, { sanitize: true }) };
@@ -16,11 +17,13 @@ const Comment = ({ comment, link, commentActions, owner }) => {
   const date = new Date(comment.dateAdded);
 
   const ownerButtons = (
-    <div className="btn-container">
-      <Link to={link}>
-        <button type="button" className="btn btn-default">Edit</button>
-      </Link>
-      <button type="button" className="btn btn-default" onClick={commentActions.removeComment}>Delete</button>
+    <div className="center">
+      <div className="btn-container">
+        <Link to={link}>
+          <button type="button" className="btn btn-default">Edit</button>
+        </Link>
+        <button type="button" className="btn btn-remove" onClick={commentActions.removeComment}>Delete</button>
+      </div>
     </div>
   );
 
@@ -42,6 +45,8 @@ const Comment = ({ comment, link, commentActions, owner }) => {
 };
 
 const Comments = ({ pollId, comments, user, params, dispatch }) => {
+  if (!comments) return <LoginButton />;
+
   const thunkBind = bindActionCreators(thunkActions, dispatch);
 
   const postComment = event => {
@@ -105,7 +110,9 @@ const Comments = ({ pollId, comments, user, params, dispatch }) => {
             </div>
           </form>
         )
-        : <div className="container center">Login to comment</div>
+        : <div className="center container">
+          <LoginButton /> to comment
+        </div>
       }
     </div>
   );
