@@ -10,6 +10,13 @@ const onSubmit = (poll, voteUp, voteAdd) => {
     e.preventDefault();
     const elem = Array.from(e.target).find(radio => radio.checked);
 
+    // Alerts user if no option selected
+    if (!elem) return alert('Please select an option.');
+    // Alerts user if they chose a custom vote, but did not enter text
+    if (!elem.value.trim() || !elem.value.match(/\w|\d|[:)(]/)) {
+      return alert('Please add text before submitting.');
+    }
+
     browserHistory.push(`/page/poll/${poll._id}/results`);
 
     if (elem.id === 'option-add') {
@@ -17,6 +24,7 @@ const onSubmit = (poll, voteUp, voteAdd) => {
     }
 
     const voteId = elem.value;
+
     return voteUp(poll._id, voteId);
   };
 };
