@@ -187,7 +187,7 @@ class EditPost extends React.Component {
               />
             </div>
             <div id="input-submit" className="center">
-              <button className="btn btn-default" type="submit">Update</button>
+              <button className="btn btn-submit" type="submit">Update</button>
             </div>
           </form>
         </div>

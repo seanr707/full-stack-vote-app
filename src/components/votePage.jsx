@@ -21,7 +21,7 @@ const VotePage = ({ polls, user, dispatch, params }) => {
       <button type="button" className="btn btn-default">
         <Link to={`/page/poll/${poll._id}/edit`}>Edit</Link>
       </button>
-      <button type="button" className="btn btn-default" onClick={() => thunkBind.deletePoll(poll._id)}>
+      <button type="button" className="btn btn-remove" onClick={() => thunkBind.deletePoll(poll._id)}>
         Delete
       </button>
     </div>

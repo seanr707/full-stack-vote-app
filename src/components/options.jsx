@@ -80,7 +80,7 @@ const Options = ({ poll, storedInput, user, dispatch }) => {
           />
         </label>
       </div>
-      <button type="submit" className="btn btn-default">Vote</button>
+      <button type="submit" className="btn btn-submit">Vote</button>
     </form>
   );
 };

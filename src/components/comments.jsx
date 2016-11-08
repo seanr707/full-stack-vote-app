@@ -16,11 +16,13 @@ const Comment = ({ comment, link, commentActions, owner }) => {
   const date = new Date(comment.dateAdded);
 
   const ownerButtons = (
-    <div className="btn-container">
-      <Link to={link}>
-        <button type="button" className="btn btn-default">Edit</button>
-      </Link>
-      <button type="button" className="btn btn-default" onClick={commentActions.removeComment}>Delete</button>
+    <div className="center">
+      <div className="btn-container">
+        <Link to={link}>
+          <button type="button" className="btn btn-default">Edit</button>
+        </Link>
+        <button type="button" className="btn btn-remove" onClick={commentActions.removeComment}>Delete</button>
+      </div>
     </div>
   );
 
