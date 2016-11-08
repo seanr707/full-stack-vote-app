@@ -55,7 +55,11 @@ button:focus {
 }
 
 .btn-remove {
-  @include makeBtn(#d0224f, #efefef);
+  @include makeBtn(#cf222f, #efefef);
+}
+
+.btn-login {
+  @include makeBtn(rgb(29, 161, 242), #fefefe);
 }
 
 .btn-round {
@@ -73,4 +77,19 @@ button:focus {
   @include makeBtnRound(32px, #33cc39);
   display: block;
   font-weight: bold;
+}
+
+.login-btn-container {
+  display: flex;
+  margin-left: -3px;
+}
+
+.login-btn-img {
+  height: 16px;
+  // width: 20px;
+  margin-right: 4px;
+}
+
+.login-btn-text {
+  margin-left: 3px;
 }

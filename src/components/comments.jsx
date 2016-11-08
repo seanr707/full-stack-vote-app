@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import marked from 'marked';
 
 import { thunkActions } from '../actions';
+import { LoginButton } from './index';
 
 const markupPoll = desc => {
   return { __html: marked(desc, { sanitize: true }) };
@@ -44,6 +45,8 @@ const Comment = ({ comment, link, commentActions, owner }) => {
 };
 
 const Comments = ({ pollId, comments, user, params, dispatch }) => {
+  if (!comments) return <LoginButton />;
+
   const thunkBind = bindActionCreators(thunkActions, dispatch);
 
   const postComment = event => {
@@ -107,7 +110,9 @@ const Comments = ({ pollId, comments, user, params, dispatch }) => {
             </div>
           </form>
         )
-        : <div className="container center">Login to comment</div>
+        : <div className="center container">
+          <LoginButton /> to comment
+        </div>
       }
     </div>
   );
