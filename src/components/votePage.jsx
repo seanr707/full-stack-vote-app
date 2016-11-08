@@ -30,7 +30,7 @@ const VotePage = ({ polls, user, dispatch, params }) => {
   );
 
   const shareButton = (
-    <a href={`https://twitter.com/intent/tweet?text=${poll.title}&url=${location.href}`} target="_blank">
+    <a href={`https://twitter.com/intent/tweet?text=Check%20out%20this%20poll%20"${poll.title}"&url=${location.href}`} target="_blank">
       <button type="button" className="btn btn-login">
         <div className="login-btn-container">
           <img className="login-btn-img" src="/public/img/twitter-logo-white.png" />
