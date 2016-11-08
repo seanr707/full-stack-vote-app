@@ -43,3 +43,18 @@
     }
   }
 }
+
+.option-add-input {
+  padding: 3px;
+  border: 1px solid $optionColor;
+  border-radius: 2px;
+  background: #ededed;
+  color: #333333;
+  transition: background 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border: 1px solid darken($optionSelectedColor, 10);
+    background: #fefefe;
+  }
+}

@@ -21,6 +21,9 @@ const onSubmit = (poll, voteUp, voteAdd) => {
   };
 };
 
+// Clicks radio button when text input is selected
+const focusOn = e => document.getElementById('option-add').click();
+
 const Options = ({ poll, storedInput, user, dispatch }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
   const actionBind = bindActionCreators(actions, dispatch);
@@ -63,6 +66,7 @@ const Options = ({ poll, storedInput, user, dispatch }) => {
             value={storedInput}
             placeholder="Your own option here..."
             onChange={e => actionBind.storeOptionInput(e.target.value)}
+            onClick={focusOn}
             type="text"
             className="option-add-input"
           />
