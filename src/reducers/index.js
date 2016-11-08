@@ -1,10 +1,12 @@
 import { Map, List } from 'immutable';
+import { LOCATION_CHANGE } from 'react-router-redux';
 
 import { actionTypes } from '../actions';
 
 const initialState = Map({
   polls: null,
-  storedInput: null,
+  // Made empty string for value of option input on options.jsx
+  storedInput: '',
   user: null,
   userView: null
 });
@@ -24,9 +26,12 @@ const reducer = (state = initialState, action) => {
   case actionTypes.LOGOUT:
     return state.set('user', null);
   case actionTypes.STORE_OPTION_INPUT:
-    return state.set('storedInput', List(action.input));
+    return state.set('storedInput', action.input);
   case actionTypes.STORE_USER_VIEW_INFO:
     return state.set('userView', action.user);
+  // Empties storedInput when the page is changed
+  case LOCATION_CHANGE:
+    return state.set('storedInput', '');
   default:
     console.log(state);
     return state;
