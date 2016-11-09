@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="/public/css/main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= poll.title %></title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="left nav-item nav-title">
+          <a href="/">Vote App</a>
+        </div>
+        <div class="right">
+          <div class="nav-item" title="Go home for full app!">
+            Reference Page Only
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="poll">
+      <h3><%= poll.title %></h3>
+      <p><%= poll.desc %></p>
+      <ul>
+        <% poll.options.map((option, i) => { %>
+          <li>
+            <%= option.title %>: <%= option.votes %>
+          </li>
+        <% }) %>
+      </ul>
+      <p>Author: <%= poll.author.name %></p>
+      <div class="comments">
+        <% if (poll.comments) { %>
+          <% poll.comments.map((comment, i) => { %>
+            <div class="comment">
+              <p><%= comment.text %></p>
+              <p><%= new Date(comment.dateAdded).toLocaleString() %></p>
+              <p>By: <%= comment.author.name %></p>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  </body>
+  <footer>
+  </footer>
+</html>

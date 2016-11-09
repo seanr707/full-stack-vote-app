@@ -1,5 +1,6 @@
 node_modules/
-dist-server/
-public/css/
-public/js/
-server/keys/
+dist/client/css/
+dist/client/js/
+dist/server/
+dist/server/keys/
+src/server/keys/

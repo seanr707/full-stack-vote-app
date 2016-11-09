@@ -13,13 +13,13 @@ const app = express();
 
 // Constants
 const DBNAME = 'fcc-voting-app';
-const VIEWDIR = process.cwd() + '/public/views';
+const VIEWDIR = process.cwd() + '/dist/client/views';
 
 app.set('port', (process.env.PORT || 5050));
 
 app.set('view engine', 'ejs');
 app.set('views', VIEWDIR);
-app.use('/public', express.static('./public'));
+app.use('/public', express.static('./dist/client'));
 
 // Store sessions
 app.use(session({
