@@ -1,5 +1,5 @@
 node_modules/
-dist-server/
-public/css/
-public/js/
+#dist-server/
+#public/css/
+#public/js/
 server/keys/
