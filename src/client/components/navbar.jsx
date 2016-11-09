@@ -1,21 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { actions } from '../actions';
+// import { actions } from '../actions';
 
 const Navbar = ({ user, dispatch }) => {
-  const actionBind = bindActionCreators(actions, dispatch);
+  // Will be used once logout is implemented
+  // const actionBind = bindActionCreators(actions, dispatch);
 
   let userInfo;
 
   if (user) {
     userInfo = (
       <div>
-        <div title={user.screenName} onClick={actionBind.logout}>
-          {user.name} [Sign Out]
-        </div>
+        <Link to={`/page/user/${user._id}`}>
+          <div title={user.screenName}>
+            {user.name}
+          </div>
+        </Link>
       </div>
     );
   } else {

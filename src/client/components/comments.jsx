@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import marked from 'marked';
@@ -11,7 +11,7 @@ const markupPoll = desc => {
   return { __html: marked(desc, { sanitize: true }) };
 };
 
-const Comment = ({ comment, link, commentActions, owner }) => {
+const Comment = ({ comment, link, removeComment, owner }) => {
   if (!comment) return null;
 
   const date = new Date(comment.dateAdded);
@@ -22,7 +22,7 @@ const Comment = ({ comment, link, commentActions, owner }) => {
         <Link to={link}>
           <button type="button" className="btn btn-default">Edit</button>
         </Link>
-        <button type="button" className="btn btn-remove" onClick={commentActions.removeComment}>Delete</button>
+        <button type="button" className="btn btn-remove" onClick={removeComment}>Delete</button>
       </div>
     </div>
   );
@@ -67,13 +67,6 @@ const Comments = ({ pollId, comments, user, params, dispatch }) => {
     commentText.value = '';
   };
 
-  const commentActions = (pollId, commentId) => {
-    return {
-      removeComment: () => thunkBind.deleteComment(pollId, commentId),
-      updateComment: (text) => thunkBind.updateComment(pollId, commentId, text)
-    };
-  };
-
   let commentText;
 
   return (
@@ -85,7 +78,7 @@ const Comments = ({ pollId, comments, user, params, dispatch }) => {
             <Comment
               comment={comment}
               owner={user && user._id === comment.author.id}
-              commentActions={commentActions(pollId, comment._id)}
+              removeComment={() => thunkBind.deleteComment(pollId, comment._id)}
               link={`/page/poll/${pollId}/comments/${comment._id}/edit`}
               key={i}
             />

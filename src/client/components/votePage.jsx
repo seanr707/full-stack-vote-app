@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import marked from 'marked';
 
 import { thunkActions } from '../actions';
@@ -16,6 +16,11 @@ const VotePage = ({ polls, user, dispatch, params }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
   const poll = polls.find(poll => poll._id === params.pollId);
 
+  const removeClick = pollId => e => {
+    thunkBind.deletePoll(pollId);
+    browserHistory.goBack();
+  };
+
   const editButtons = (
     <span>
       <Link to={`/page/poll/${poll._id}/edit`}>
@@ -23,7 +28,7 @@ const VotePage = ({ polls, user, dispatch, params }) => {
           Edit
         </button>
       </Link>
-      <button type="button" className="btn btn-remove" onClick={() => thunkBind.deletePoll(poll._id)}>
+      <button type="button" className="btn btn-remove" onClick={removeClick(poll._id)}>
         Delete
       </button>
     </span>
