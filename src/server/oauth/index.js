@@ -7,7 +7,7 @@ export default models => {
     {
       consumerKey: process.env.TWITTER_CONSUMER_KEY || TWITTER_CONSUMER_KEY,
       consumerSecret: process.env.TWITTER_CONSUMER_SECRET || TWITTER_CONSUMER_SECRET,
-      callbackURL: 'http://127.0.0.1:5050/auth/twitter/callback'
+      callbackURL: process.env.CALLBACK_URL || 'http://127.0.0.1:5050/auth/twitter/callback'
     },
       (token, tokenSecret, profile, done) => {
         const user = {
