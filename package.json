@@ -4,9 +4,15 @@
   "description": "Vote away",
   "main": "index.js",
   "scripts": {
-    "build-production": "webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors",
-    "build": "webpack --progress --colors",
-    "dev": "node_modules/.bin/webpack-dev-server --inline --hot --colors --progress"
+    "start": "npm run build && node dist-server",
+    "start-dev": "babel-node server",
+    "clean": "rm -r dist-server && rm public/css/main.css && public/js/bundle.js",
+    "build-front": "webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors",
+    "build-front-dev": "webpack --progress --colors",
+    "build-server": "babel server -d dist-server",
+    "build": "npm run build-front && npm run build-server",
+    "build-dev": "npm run build-front-dev && npm run build-server",
+    "webpack-dev-server": "node_modules/.bin/webpack-dev-server --inline --hot --colors --progress"
   },
   "repository": {
     "type": "git",
@@ -25,9 +31,12 @@
   "dependencies": {
     "axios": "^0.14.0",
     "body-parser": "^1.15.2",
+    "d3": "^4.2.6",
+    "ejs": "^2.5.2",
     "express": "^4.14.0",
     "express-session": "^1.14.1",
     "immutable": "^3.8.1",
+    "marked": "^0.3.6",
     "mongoose": "^4.6.1",
     "passport": "^0.3.2",
     "passport-twitter": "^1.0.4",
@@ -35,11 +44,13 @@
     "react-dom": "^15.3.1",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
+    "react-router-redux": "^4.0.6",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.0",
+    "babel-cli": "^6.16.0",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
     "babel-polyfill": "^6.13.0",
@@ -48,6 +59,7 @@
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "node-sass": "^3.10.0",
+    "nodemon": "^1.11.0",
     "postcss-custom-selectors": "^3.0.0",
     "postcss-loader": "^0.13.0",
     "postcss-selector-not": "^2.0.0",

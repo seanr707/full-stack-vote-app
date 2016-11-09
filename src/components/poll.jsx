@@ -1,55 +1,36 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { thunkActions } from '../actions/index.jsx';
+import { thunkActions } from '../actions';
 
 const Poll = ({ poll, dispatch }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
 
-  const tempPoll = {
-    update: {
-      title: 'Edited poll here',
-      desc: 'I was edited',
-      author: {
-        _id: null,
-        name: 'n/a'
-      },
-      options: [
-        {
-          title: 'Yeah',
-          votes: 0
-        },
-        {
-          title: 'Not here',
-          votes: 0
-        },
-        {
-          title: Math.floor(Math.random() * 5).toString(),
-          votes: 0
-        }
-      ]
-    }
-  };
+  const miliseconds = 1000 * 60 * 60 * 24;
+
+  // const timeText = poll.dateUpdated > poll.dateAdded ? 'Updated' : 'Added';
+
+  const date = Date.now() < (poll.dateUpdated + miliseconds)
+    // If less than a day old, display exact time (without the seconds value)
+    ? new Date(poll.dateUpdated).toLocaleTimeString().replace(/:[0-9][0-9]\s/, ' ')
+    : new Date(poll.dateUpdated).toLocaleDateString();
 
   return (
-    <div className="poll">
-      <h3>{poll.title}</h3>
-      <p>{poll.desc}</p>
-      <ul>
-        {poll.options.map((option, i) => {
-          return (
-            <li key={i} onClick={() => thunkBind.votePoll(poll._id, option._id)}>
-                {option.title}: {option.votes}
-            </li>
-          );
-        })}
-      </ul>
-      <p>Author: {poll.author.name}</p>
-      <div className="button-container">
-        <button onClick={() => thunkBind.editPoll(poll._id, tempPoll)}>Edit</button>
-        <button onClick={() => thunkBind.deletePoll(poll._id)}>Delete</button>
-      </div>
+    <div className="poll-tile row">
+      <Link to={`/page/poll/${poll._id}`}>
+        <h3 title={`"${poll.desc.substr(0, 20)}..."`} className="col-8">
+          { poll.authRequired ? <span className="tag">Verified</span> : null }
+          {poll.title}
+        </h3>
+        <div className="poll-info-container col-4">
+          <div className="poll-info-item">
+            {poll.author.name} (@{poll.author.username})
+          </div>
+          <div className="poll-info-item">{date}</div>
+        </div>
+      </Link>
     </div>
   );
 };

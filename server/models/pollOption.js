@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-module.exports = mongoose.Schema({
+export default mongoose.Schema({
   title: String,
   votes: Number
 });

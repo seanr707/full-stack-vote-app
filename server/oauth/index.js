@@ -1,12 +1,12 @@
-const passport = require('passport');
-const TwitterStrategy = require('passport-twitter').Strategy;
+import passport from 'passport';
+import { Strategy } from 'passport-twitter';
 
-const keys = require('../keys');
-module.exports = (models) => {
-  passport.use(new TwitterStrategy(
+import { TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET } from '../keys';
+export default models => {
+  passport.use(new Strategy(
     {
-      consumerKey: keys.TWITTER_CONSUMER_KEY,
-      consumerSecret: keys.TWITTER_CONSUMER_SECRET,
+      consumerKey: process.env.TWITTER_CONSUMER_KEY || TWITTER_CONSUMER_KEY,
+      consumerSecret: process.env.TWITTER_CONSUMER_SECRET || TWITTER_CONSUMER_SECRET,
       callbackURL: 'http://127.0.0.1:5050/auth/twitter/callback'
     },
       (token, tokenSecret, profile, done) => {
