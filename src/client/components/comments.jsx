@@ -84,7 +84,7 @@ const Comments = ({ pollId, comments, user, params, dispatch }) => {
           return (
             <Comment
               comment={comment}
-              owner={user._id === comment.author.id}
+              owner={user && user._id === comment.author.id}
               commentActions={commentActions(pollId, comment._id)}
               link={`/page/poll/${pollId}/comments/${comment._id}/edit`}
               key={i}
