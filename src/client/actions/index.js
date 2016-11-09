@@ -40,7 +40,6 @@ export const actions = {
     };
   },
   login: (user) => {
-    console.log(user);
     return {
       type: actionTypes.LOGIN,
       user
@@ -86,8 +85,6 @@ export const thunkActions = {
   },
   editPoll: (id, update) => {
     return dispatch => {
-      console.log(id);
-      console.log(update);
       return axios.put(`/poll/id/${id}`, update).then(
         res => dispatch(actions.updatePoll(res.data)),
         err => console.error(err)
@@ -99,11 +96,10 @@ export const thunkActions = {
       const { reducer } = getState();
       return axios.put(`/poll/id/${pollId}/vote/${optionId}`).then(
         res => {
-          console.log(res.data);
           dispatch(actions.updatePoll(res.data));
           dispatch(thunkActions.verifyUser(reducer.get('_id')));
         },
-        err => console.log(err)
+        err => console.error(err)
       );
     };
   },
@@ -118,7 +114,7 @@ export const thunkActions = {
   getAllPolls: () => {
     return dispatch => {
       dispatch(actions.updateAllPolls(null));
-      console.log('updating polls...');
+      // console.log('updating polls...');
       return axios.get('/polls').then(
         // Reverse order so it starts with the newest on top
         res => dispatch(actions.updateAllPolls(res.data)),

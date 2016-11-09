@@ -33,7 +33,6 @@ const reducer = (state = initialState, action) => {
   case LOCATION_CHANGE:
     return state.set('storedInput', '');
   default:
-    console.log(state);
     return state;
   }
 };

@@ -9,7 +9,7 @@ export default (app, models) => {
     })
     .put(jsonParser, (req, res) => {
       const id = { _id: req.params.pollId };
-      console.log(req.body.update);
+
       const update = Object.assign({}, req.body.update, {
         dateUpdated: Date.now(),
         options: req.body.update.options.map(option => {
@@ -24,8 +24,6 @@ export default (app, models) => {
         })
       });
 
-      console.log(update);
-
       return models.Poll.findOneAndUpdate(id, update, { new: true }, callback(res));
     })
     .delete((req, res) => {
@@ -35,8 +33,6 @@ export default (app, models) => {
 
   app.route('/polls')
     .get((req, res) => {
-      console.log('requesting all polls...');
-
       return models.Poll.find((err, polls) => {
         if (err) console.error(err);
 
@@ -45,8 +41,6 @@ export default (app, models) => {
     })
     .post(jsonParser, (req, res) => {
       const input = req.body;
-
-      console.log(input.options);
 
       const newPoll = new models.Poll(Object.assign({}, input, {
         dateAdded: Date.now(),
@@ -57,10 +51,6 @@ export default (app, models) => {
         })
       }));
 
-      newPoll.save((err, poll) => {
-        if (err) console.error(err);
-        console.log(poll);
-        return res.send(poll);
-      });
+      newPoll.save(callback(res));
     });
 };

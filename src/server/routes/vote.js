@@ -4,7 +4,7 @@ const verifiedPoll = (res, models, userId, poll, nextOptionId) => {
   return (err, user) => {
     if (err) return err;
 
-    console.log('User is logged in to vote!');
+    // console.log('User is logged in to vote!');
     const pollVoted = user.pollsVoted.find(item => item.pollId.toString() === poll._id.toString());
 
     let userUpdate;
@@ -15,20 +15,20 @@ const verifiedPoll = (res, models, userId, poll, nextOptionId) => {
 
       pollUpdate = poll.options.map(option => {
         if (nextOptionId.toString() === option._id.toString()) {
-          console.log('Removing user\'s vote from poll...');
+          // console.log('Removing user\'s vote from poll...');
           option.votes -= 1;
         }
 
         return option;
       });
     } else if (pollVoted) {
-      console.log('User has already voted, changing votes!');
+      // console.log('User has already voted, changing votes!');
       pollUpdate = poll.options.map(option => {
         if (pollVoted.optionId.toString() === option._id.toString()) {
-          console.log('Taking away old vote...');
+          // console.log('Taking away old vote...');
           option.votes -= 1;
         } else if (nextOptionId.toString() === option._id.toString()) {
-          console.log(`Here is ${option.votes} + 1: ${option.votes + 1}`);
+          // console.log(`Here is ${option.votes} + 1: ${option.votes + 1}`);
           option.votes += 1;
         }
 
@@ -43,10 +43,10 @@ const verifiedPoll = (res, models, userId, poll, nextOptionId) => {
         return item;
       });
     } else {
-      console.log('User has NOT voted, adding vote!');
+      // console.log('User has NOT voted, adding vote!');
       pollUpdate = poll.options.map(option => {
         if (nextOptionId.toString() === option._id.toString()) {
-          console.log(`Here is ${option.votes} + 1: ${option.votes + 1}`);
+          // console.log(`Here is ${option.votes} + 1: ${option.votes + 1}`);
           option.votes += 1;
         }
 
@@ -69,7 +69,7 @@ export default (app, models) => {
     .post(jsonParser, (req, res) => {
       const id = { _id: req.params.pollId };
 
-      console.log(req.body.update);
+      // console.log(req.body.update);
       models.Poll.findById(id, (err, poll) => {
         if (err) return err;
 
@@ -113,7 +113,7 @@ export default (app, models) => {
         } else {
           const update = poll.options.map(option => {
             if (req.params.voteId === option._id.toString()) {
-              console.log(`Here is ${option.votes} + 1: ${option.votes + 1}`);
+              // Increasing votes for this option
               option.votes += 1;
             }
 
