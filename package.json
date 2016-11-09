@@ -4,7 +4,7 @@
   "description": "Vote away",
   "main": "index.js",
   "scripts": {
-    "start": "node dist-server",
+    "start": "npm run build && node dist-server",
     "start-dev": "babel-node server",
     "clean": "rm -r dist-server && rm public/css/main.css && public/js/bundle.js",
     "build-front": "webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors",
