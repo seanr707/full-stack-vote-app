@@ -85,7 +85,7 @@ const Options = ({ poll, storedInput, user, dispatch }) => {
         );
       })}
       { /* Display addOption element if user is logged in */ }
-      { user ? addOption : null }
+      { user && !poll.authRequired ? addOption : null }
       <button type="submit" className="btn btn-submit">Vote</button>
     </form>
   );
