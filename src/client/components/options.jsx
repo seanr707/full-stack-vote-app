@@ -44,6 +44,28 @@ const Options = ({ poll, storedInput, user, dispatch }) => {
     const selectedPoll = user.pollsVoted.find(item => item.pollId === poll._id);
     selectedVoteId = selectedPoll.optionId;
   }
+
+  const addOption = (
+    <div className="option-container">
+      <input
+        id="option-add"
+        type="radio"
+        name="option"
+        value={storedInput}
+      />
+      <label htmlFor="option-add" className="option">
+        <input
+          value={storedInput}
+          placeholder="Your own option here..."
+          onChange={e => actionBind.storeOptionInput(e.target.value)}
+          onClick={focusOn}
+          type="text"
+          className="option-add-input"
+        />
+      </label>
+    </div>
+  );
+
   return (
     <form className="options" onSubmit={onSubmit(poll, thunkBind.votePoll, thunkBind.voteAdd)}>
       {poll.options.map((option, i) => {
@@ -62,24 +84,8 @@ const Options = ({ poll, storedInput, user, dispatch }) => {
           </div>
         );
       })}
-      <div className="option-container">
-        <input
-          id="option-add"
-          type="radio"
-          name="option"
-          value={storedInput}
-        />
-        <label htmlFor="option-add" className="option">
-          <input
-            value={storedInput}
-            placeholder="Your own option here..."
-            onChange={e => actionBind.storeOptionInput(e.target.value)}
-            onClick={focusOn}
-            type="text"
-            className="option-add-input"
-          />
-        </label>
-      </div>
+      { /* Display addOption element if user is logged in */ }
+      { user ? addOption : null }
       <button type="submit" className="btn btn-submit">Vote</button>
     </form>
   );
