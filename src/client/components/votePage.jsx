@@ -17,7 +17,7 @@ const VotePage = ({ polls, user, dispatch, params }) => {
   const poll = polls.find(poll => poll._id === params.pollId);
 
   // Will be used to align text if it is a small amount
-  const descAlign = { textAlign: center };
+  const descAlign = { textAlign: 'center' };
 
   const removeClick = pollId => e => {
     thunkBind.deletePoll(pollId);
