@@ -1,11 +1,8 @@
 import passport from 'passport';
 import { Strategy } from 'passport-twitter';
 
-try {
-  import { TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET } from '../keys';
-} catch (err) {
-  // OK, Cannot import on Heroku
-}
+// Comment out for deployment
+// import { TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET } from '../keys';
 
 export default models => {
   passport.use(new Strategy(
