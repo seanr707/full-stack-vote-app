@@ -12,6 +12,7 @@
     "build-server": "babel src/server -d dist/server",
     "build": "npm run build-front && npm run build-server",
     "build-dev": "npm run build-front-dev && npm run build-server",
+    "deploy": "git checkout heroku && git merge --no-commit --no-ff development && npm run build && git commit -a -m \"New build for Heroku\" && git push heroku heroku:master && git checkout development",
     "webpack-dev-server": "node_modules/.bin/webpack-dev-server --inline --hot --colors --progress"
   },
   "repository": {
