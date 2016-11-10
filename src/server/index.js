@@ -7,7 +7,11 @@ import routes from './routes';
 import models from './models';
 import oauth from './oauth';
 
-import { COOKIE_KEY } from './keys';
+try {
+  import { COOKIE_KEY } from './keys';
+} catch (err) {
+  // OK, Cannot import on Heroku
+}
 
 const app = express();
 
