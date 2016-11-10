@@ -1,14 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
-const WebpackDevServer = require("webpack-dev-server");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const precss = require('precss');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
-  entry: './src/main.js',
+  entry: './src/client/main.js',
   output: {
-    path: path.join(__dirname, 'public', 'js'),
+    path: path.join(__dirname, 'dist', 'client', 'js'),
     publicPath: '/js',
     filename: 'bundle.js'
   },
