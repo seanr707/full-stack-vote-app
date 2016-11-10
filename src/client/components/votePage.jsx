@@ -16,6 +16,9 @@ const VotePage = ({ polls, user, dispatch, params }) => {
   const thunkBind = bindActionCreators(thunkActions, dispatch);
   const poll = polls.find(poll => poll._id === params.pollId);
 
+  // Will be used to align text if it is a small amount
+  const descAlign = { textAlign: center };
+
   const removeClick = pollId => e => {
     thunkBind.deletePoll(pollId);
     browserHistory.goBack();
@@ -48,7 +51,7 @@ const VotePage = ({ polls, user, dispatch, params }) => {
   const loggedInButtons = (
     <div className="center">
       <span style={{ display: 'inline-flex' }}>
-        {shareButton}
+        { shareButton }
         { user && poll.author.id === user._id ? editButtons : null }
       </span>
     </div>
@@ -56,7 +59,11 @@ const VotePage = ({ polls, user, dispatch, params }) => {
 
   return (
     <div className="poll-info">
-      <p id="poll-desc" dangerouslySetInnerHTML={markupPoll(poll.desc)} />
+      <p
+        id="poll-desc"
+        dangerouslySetInnerHTML={markupPoll(poll.desc)}
+        style={poll.desc.length > 50 ? descAlign : null}
+      />
       {
         poll.authRequired && !user
           ? <LoginButton />
