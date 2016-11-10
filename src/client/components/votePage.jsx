@@ -62,7 +62,7 @@ const VotePage = ({ polls, user, dispatch, params }) => {
       <p
         id="poll-desc"
         dangerouslySetInnerHTML={markupPoll(poll.desc)}
-        style={poll.desc.length > 50 ? descAlign : null}
+        style={poll.desc.length <= 100 ? descAlign : null}
       />
       {
         poll.authRequired && !user
