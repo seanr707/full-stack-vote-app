@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -18,19 +18,24 @@ const Poll = ({ poll, dispatch }) => {
     : new Date(poll.dateUpdated).toLocaleDateString();
 
   return (
-    <div className="poll-tile row">
-      <Link to={`/page/poll/${poll._id}`}>
-        <h3 title={`"${poll.desc.substr(0, 20)}..."`} className="col-8">
+    <div className="poll-tile flexbox" onClick={() => browserHistory.push(`/page/poll/${poll._id}`)}>
+      <div className="col-1">
+        <p className="center">
           { poll.authRequired ? <span className="tag">Verified</span> : null }
-          {poll.title}
+        </p>
+      </div>
+      <div className="col-8">
+        <h3 title={poll.title}>
+          { poll.title.length > 40 ? `${poll.title.substr(0, 40)}...` : poll.title }
         </h3>
-        <div className="poll-info-container col-4">
-          <div className="poll-info-item">
-            {poll.author.name} (@{poll.author.username})
-          </div>
-          <div className="poll-info-item">{date}</div>
+      </div>
+
+      <div className="poll-info-container col-4">
+        <div className="poll-info-item">
+          {poll.author.name} (@{poll.author.username})
         </div>
-      </Link>
+        <div className="poll-info-item">{date}</div>
+      </div>
     </div>
   );
 };

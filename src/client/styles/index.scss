@@ -7,18 +7,36 @@
 @import "vote-options";
 @import "graph";
 @import "comments";
+@import "poll";
 @import "forms";
 @import "buttons";
 
+// Google fonts
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
 body {
   background: #ededed;
-  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
   margin: 0;
+}
+
+h1, h2, h3, h4, .poll-head {
+  font-family: "Montserrat", sans-serif;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+pre {
+  background: #777777;
+  color: #dddddd;
+  padding: 5px;
+  text-align: left;
+  border-radius: 3px;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
 .container {
@@ -27,75 +45,13 @@ a {
   padding: 20px;
 }
 
-.poll-container {
-  max-width: $max-width;
-  margin: 5px auto;
-  border-radius: $border-radius;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-}
+.flexbox {
+  display: flex;
 
-.poll-tile {
-  border: 1px solid #aaaaaa;
-  background: white;
-  padding: 10px 20px;
-  margin-top: -1px;
-  transition: all 0.2s ease;
-
-  &:first-child {
-    margin-top: 10px;
-    border-radius: $border-radius $border-radius 0 0;
+  div, span {
+    margin-left: auto;
+    margin-right: auto;
   }
-
-  &:last-of-type {
-    margin-bottom: 10px;
-    border-radius: 0 0 $border-radius $border-radius;
-
-    &:hover {
-      // Makes shadow go up since it is at the bottom of the list
-      box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.4);
-    }
-  }
-
-  &:hover {
-    position: relative;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-  }
-}
-
-.page-main {
-  // position and z-index adjusted so comments go below box
-  position: relative;
-  z-index: 2;
-  border: 1px solid #aaaaaa;
-  border-radius: 2px;
-  background: white;
-  margin: 5px auto;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-}
-
-.poll-head {
-  padding: 10px;
-  margin: -1px;
-  font-size: 20px;
-  background: #3377cc;
-  color: #efefef;
-  border-radius: 3px 3px 0 0;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-  text-align: center;
-}
-
-.poll-foot {
-  padding: 5px 10px;
-  margin: -1px;
-  font-size: 10px;
-  background: #444444;
-  color: #ececec;
-}
-
-.poll-info {
-  padding: 10px 20px;
-  margin: 0 auto;
-  text-align: center;
 }
 
 .left {
@@ -123,28 +79,6 @@ a {
   &:hover {
     color: #333333;
   }
-}
-
-.poll-info-container {
-  text-align: right;
-  margin: 15px 0;
-}
-
-.tag {
-  padding: 5px;
-  margin: 0 4px;
-  font-size: 10px;
-  background: rgba(0, 0, 0, 0.2);
-  color: #fefefe;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
-  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
-}
-
-.poll-info-item {
-  font-size: 10px;
-  margin: 2px 0;
-  color: #888888;
 }
 
 #root {
