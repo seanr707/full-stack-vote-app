@@ -15,7 +15,7 @@ const Navbar = ({ user, dispatch }) => {
     userInfo = (
       <div>
         <Link to={`/page/user/${user._id}`}>
-          <div title="View info about yourself and your polls.">
+          <div title={user.screenName}>
             {user.name}
           </div>
         </Link>
@@ -24,7 +24,7 @@ const Navbar = ({ user, dispatch }) => {
   } else {
     userInfo = (
       <a href="/auth/twitter">
-        <div className="login-btn-container" title="Login with Twitter">
+        <div className="login-btn-container">
           <img className="login-btn-img" src="/public/img/twitter-logo-white.png" />
           <span>Login</span>
         </div>
