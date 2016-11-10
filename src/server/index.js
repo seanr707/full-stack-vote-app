@@ -7,7 +7,8 @@ import routes from './routes';
 import models from './models';
 import oauth from './oauth';
 
-import { COOKIE_KEY } from './keys';
+// Comment out for deployment
+// import { COOKIE_KEY } from './keys';
 
 const app = express();
 

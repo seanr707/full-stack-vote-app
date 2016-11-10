@@ -14,14 +14,19 @@ const Toolbar = ({ currentRoute, user, dispatch }) => {
   return (
     <nav className="toolbar">
       <div className="toolbar-container row">
-        <button className="toolbar-item col-4" onClick={backClick} disabled={currentRoute === '/'}>
+        <button
+          className="toolbar-item col-4"
+          title="Go back to the previous page in the app"
+          onClick={backClick}
+          disabled={currentRoute === '/'}
+        >
           ◀
         </button>
-        <button className="toolbar-item col-4" onClick={getClick}>
+        <button title="Fetch new poll data from server" className="toolbar-item col-4" onClick={getClick}>
           ↻
         </button>
         {user
-          ? <button className="toolbar-item col-4">
+          ? <button title="Add a new poll" className="toolbar-item col-4">
             <Link to="/page/submit">
               +
             </Link>

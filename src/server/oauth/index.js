@@ -1,7 +1,9 @@
 import passport from 'passport';
 import { Strategy } from 'passport-twitter';
 
-import { TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET } from '../keys';
+// Comment out for deployment
+// import { TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET } from '../keys';
+
 export default models => {
   passport.use(new Strategy(
     {

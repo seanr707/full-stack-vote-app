@@ -36,7 +36,7 @@ const Navbar = ({ user, dispatch }) => {
     <nav className="navbar">
       <div className="navbar-container">
         <div className="left nav-item nav-title">
-          <Link to="/">{ process.env.TITLE || 'Vote App' }</Link>
+          <Link to="/">{ process.env.TITLE || 'Poll-It' }</Link>
         </div>
         <div className="right">
           <div className="nav-item nav-option">
